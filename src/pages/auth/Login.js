@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import api from "../../apis/api";
 import logo from "../../assets/img/Logo_Option_1.png";
+import colaborative from "../../assets/img/colaborative.svg";
 
 import "./auth.css";
 
@@ -49,50 +50,61 @@ function Login(props) {
   }
 
   return (
-    <div className="container">
-      <div className="logo">
-        <img src={logo} alt="logo" />
+    <div className="web-container">
+      <div className="carousel">
+        <img className="img" src={colaborative} alt="" />
+        <h1>Hey! Do you know that Organize.me is colaborative?</h1>
+        <p>
+          Bring your professional help, a friend or other people to help you,
+          send and invite of your task or share your calendar.{" "}
+        </p>
       </div>
-      <form className="form" onSubmit={handleSubmit}>
-        <div>
-          {/* <label htmlFor="signupFormEmail">E-mail Address</label> */}
-          <input
-            className="input"
-            placeholder="Email"
-            type="email"
-            name="email"
-            id="signupFormEmail"
-            value={state.email}
-            error={errors.email}
-            onChange={handleChange}
-          />
+
+      <div className="container">
+        <div className="logo">
+          <img src={logo} alt="logo" />
         </div>
-
-        <div>
-          {/* <label htmlFor="signupFormPassword">Password</label> */}
-          <input
-            className="input"
-            placeholder="Password"
-            type="password"
-            name="password"
-            id="signupFormPassword"
-            value={state.password}
-            error={errors.password}
-            onChange={handleChange}
-          />
-        </div>
-
-        <div className="btn-container">
-          <button className="btn-lg" type="submit">
-            Login!
-          </button>
-
-          <div className="spam">
-            Don't have an account?{" "}
-            <Link to="/signup"> Click here to signup!</Link>
+        <form className="form" onSubmit={handleSubmit}>
+          <div>
+            {/* <label htmlFor="signupFormEmail">E-mail Address</label> */}
+            <input
+              className="input"
+              placeholder="Email"
+              type="email"
+              name="email"
+              id="signupFormEmail"
+              value={state.email}
+              error={errors.email}
+              onChange={handleChange}
+            />
           </div>
-        </div>
-      </form>
+
+          <div>
+            {/* <label htmlFor="signupFormPassword">Password</label> */}
+            <input
+              className="input"
+              placeholder="Password"
+              type="password"
+              name="password"
+              id="signupFormPassword"
+              value={state.password}
+              error={errors.password}
+              onChange={handleChange}
+            />
+          </div>
+
+          <div className="btn-container">
+            <button className="btn-lg" type="submit">
+              Login!
+            </button>
+
+            <div className="spam">
+              Don't have an account?{" "}
+              <Link to="/signup"> Click here to signup!</Link>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }
