@@ -1,8 +1,9 @@
 import React, { useState, useContext } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import api from "../../apis/api";
+import logo from "../../assets/img/Logo_Option_1.png";
 
-import "./Login.css";
+import "./auth.css";
 
 import { AuthContext } from "../../contexts/authContext";
 
@@ -48,39 +49,51 @@ function Login(props) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h1 className="test">Login</h1>
-
-      <div>
-        <label htmlFor="signupFormEmail">E-mail Address</label>
-        <input
-          type="email"
-          name="email"
-          id="signupFormEmail"
-          value={state.email}
-          error={errors.email}
-          onChange={handleChange}
-        />
+    <div className="container">
+      <div className="logo">
+        <img src={logo} alt="logo" />
       </div>
+      <form className="form" onSubmit={handleSubmit}>
+        <div>
+          {/* <label htmlFor="signupFormEmail">E-mail Address</label> */}
+          <input
+            className="input"
+            placeholder="Email"
+            type="email"
+            name="email"
+            id="signupFormEmail"
+            value={state.email}
+            error={errors.email}
+            onChange={handleChange}
+          />
+        </div>
 
-      <div>
-        <label htmlFor="signupFormPassword">Password</label>
-        <input
-          type="password"
-          name="password"
-          id="signupFormPassword"
-          value={state.password}
-          error={errors.password}
-          onChange={handleChange}
-        />
-      </div>
+        <div>
+          {/* <label htmlFor="signupFormPassword">Password</label> */}
+          <input
+            className="input"
+            placeholder="Password"
+            type="password"
+            name="password"
+            id="signupFormPassword"
+            value={state.password}
+            error={errors.password}
+            onChange={handleChange}
+          />
+        </div>
 
-      <div>
-        <button type="submit">Login!</button>
+        <div className="btn-container">
+          <button className="btn-lg" type="submit">
+            Login!
+          </button>
 
-        <Link to="/signup">Don't have an account? Click here to signup!</Link>
-      </div>
-    </form>
+          <div className="spam">
+            Don't have an account?{" "}
+            <Link to="/signup"> Click here to signup!</Link>
+          </div>
+        </div>
+      </form>
+    </div>
   );
 }
 
