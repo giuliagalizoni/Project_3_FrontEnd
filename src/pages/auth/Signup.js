@@ -45,7 +45,7 @@ function Signup(props) {
         <div>
           {/* <label htmlFor="signupFormName">Name</label> */}
           <input
-            className="input"
+            className="input-auth"
             placeholder="Name"
             type="text"
             name="name"
@@ -59,7 +59,7 @@ function Signup(props) {
         <div>
           {/* <label htmlFor="signupFormEmail">E-mail Address</label> */}
           <input
-            className="input"
+            className="input-auth"
             placeholder="Email"
             type="email"
             name="email"
@@ -73,7 +73,7 @@ function Signup(props) {
         <div>
           {/* <label htmlFor="signupFormPassword">Password</label> */}
           <input
-            className="input"
+            className="input-auth"
             placeholder="Password"
             type="password"
             name="password"

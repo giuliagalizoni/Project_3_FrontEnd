@@ -3,6 +3,8 @@ import React from "react";
 import CreatableSelect from "react-select/creatable";
 // import { ActionMeta, OnChangeValue } from "react-select";
 
+import "./taskForms.css";
+
 import { useNavigate } from "react-router-dom";
 import api from "../apis/api";
 import { useState } from "react";
@@ -95,9 +97,10 @@ function CreateTask() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="form" onSubmit={handleSubmit}>
       <FormControl
-        label="Name"
+        label="Task name"
+        labelclass="label-primary"
         id="newtaskname"
         name="name"
         onChange={handleChange}
@@ -113,22 +116,28 @@ function CreateTask() {
         value={state.steps}
       />
       <button >+</button> */}
-
-      <CreatableSelect
-        components={components}
-        inputValue={selectStep.inputValue}
-        isClearable
-        isMulti
-        menuIsOpen={false}
-        onChange={handleChange}
-        onInputChange={handleInputChange}
-        onKeyDown={handleKeyDown}
-        placeholder="Type something and press enter..."
-        value={selectStep.value}
-      />
+      <div className="creatable-div">
+        <label htmlFor="selectCreatable" className="">
+          Steps
+        </label>
+        <CreatableSelect
+          components={components}
+          inputValue={selectStep.inputValue}
+          isClearable
+          isMulti
+          menuIsOpen={false}
+          onChange={handleChange}
+          onInputChange={handleInputChange}
+          onKeyDown={handleKeyDown}
+          placeholder="Type something and press enter..."
+          value={selectStep.value}
+          id="selectCreatable"
+        />
+      </div>
 
       <SelectControl
         label="Field"
+        labelclass="label"
         id="fieldselect"
         name="field"
         onChange={handleChange}
@@ -146,6 +155,7 @@ function CreateTask() {
       <FormControl
         type="date"
         label="Date"
+        labelclass="label"
         id="date"
         name="date"
         onChange={handleChange}
@@ -153,6 +163,7 @@ function CreateTask() {
       />
       <SelectControl
         label="Week Days"
+        labelclass="label"
         id="weekday"
         name="weekday"
         onChange={handleChange}
@@ -167,30 +178,39 @@ function CreateTask() {
           </option>
         ))}
       </SelectControl>
-      <FormControl
-        type="time"
-        label="Start Time"
-        id="starttime"
-        name="starttime"
-        onChange={handleChange}
-        value={state.starttime}
-      />
-      <FormControl
-        type="time"
-        label="End Time"
-        id="endtime"
-        name="endtime"
-        onChange={handleChange}
-        value={state.endtime}
-      />
+
+      <div className="time-container">
+        <FormControl
+          type="time"
+          label="Start Time"
+          labelclass="label"
+          id="starttime"
+          name="starttime"
+          onChange={handleChange}
+          value={state.starttime}
+        />
+        <FormControl
+          type="time"
+          label="End Time"
+          labelclass="label"
+          id="endtime"
+          name="endtime"
+          onChange={handleChange}
+          value={state.endtime}
+        />
+      </div>
+
       <FormControl
         label="Comments"
+        labelclass="label"
         id="comments"
         name="comments"
         onChange={handleChange}
         value={state.comments}
       />
-      <button type="submit">Create Task</button>
+      <button className="btn-lg" type="submit">
+        Create Task
+      </button>
     </form>
   );
 }
