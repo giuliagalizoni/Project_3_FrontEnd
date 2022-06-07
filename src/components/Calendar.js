@@ -23,7 +23,7 @@ function Calendar(props) {
               {format(day, "d")}
               <div
                 className={
-                  format(day, "yyyy-MM-dd") === format(today, "yyyy-MM-dd")
+                  props.active === format(day, "yyyy-MM-dd")
                     ? "highlight"
                     : "no-highlight"
                 }

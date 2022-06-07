@@ -1,10 +1,16 @@
 import React from "react";
 import Calendar from "../components/Calendar";
 import Navbar from "../components/Navbar";
+import { useState } from "react";
+
+import { format } from "date-fns";
 
 function Home() {
+  const [active, setActive] = useState(format(new Date(), "yyyy-MM-dd"));
+
   function handleDayClick({ target }) {
-    console.log(target.value);
+    setActive(target.value);
+    console.log(active);
 
     // fazer o api.get aqui
   }
@@ -14,7 +20,7 @@ function Home() {
       <Navbar />
       <p>This is the homepage</p>
 
-      <Calendar onClick={handleDayClick} />
+      <Calendar onClick={handleDayClick} active={active} />
     </div>
   );
 }
