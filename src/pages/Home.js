@@ -16,10 +16,11 @@ function Home() {
   }
 
   return (
+    <div>
+    <Navbar />
     <div className="text-center">
-      <Navbar />
       <p>This is the homepage</p>
-
+      </div>
       <Calendar onClick={handleDayClick} active={active} />
     </div>
   );

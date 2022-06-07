@@ -11,9 +11,11 @@ import { useState } from "react";
 import FormControl from "../components/control/FormControl";
 import SelectControl from "../components/control/SelectControl";
 
+
 const components = {
   DropdownIndicator: null,
 };
+
 
 const field = [
   { value: "Work", label: "Work" },
@@ -37,7 +39,7 @@ const createOption = (label) => ({
 });
 
 function CreateTask() {
-  const [state, setState] = useState({
+    const [state, setState] = useState({
     name: "",
     steps: [],
     field: "Work",
