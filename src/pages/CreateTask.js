@@ -1,7 +1,7 @@
 import React from "react";
 
 import CreatableSelect from "react-select/creatable";
-// import { ActionMeta, OnChangeValue } from "react-select";
+import { format } from "date-fns";
 
 import "./taskForms.css";
 
@@ -41,7 +41,7 @@ function CreateTask() {
     name: "",
     steps: [],
     field: "Work",
-    date: "2022-01-01",
+    date: format(new Date(), "yyyy-MM-dd"),
     weekday: "Mon",
     starttime: "00:00",
     endtime: "00:00",
@@ -73,7 +73,6 @@ function CreateTask() {
 
   function handleChange(event) {
     //  If criado por causa da biblioteca CreatableSelect
-    console.log(event);
     if (!event.target) {
       // Event nesse caso é o value do component CreatableSelect
       setSelectStep({ ...selectStep, value: [...event] });
