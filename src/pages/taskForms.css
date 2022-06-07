@@ -1,0 +1,24 @@
+.time-container {
+  display: flex;
+  width: 380px;
+}
+
+.btn-lg {
+  width: 371px;
+  height: 63px;
+
+  background: #3397f1;
+  border-radius: 5px;
+  border: none;
+
+  color: #f2f2f2;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 20px;
+  line-height: 108.1%;
+}
+
+.creatable-div {
+  display: flex;
+  justify-content: space-around;
+}

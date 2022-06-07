@@ -1,0 +1,35 @@
+.form-container {
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.label-primary {
+  color: #2b69f5;
+  font-weight: 800;
+  font-size: 20px;
+  line-height: 20px;
+  margin-left: 10px;
+}
+
+.label {
+  color: #4f4f4f;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  margin-left: 10px;
+}
+
+.input {
+  height: 30px;
+  width: auto;
+  border-left: 0px;
+  border-right: 0px;
+  border-top: 0px;
+  border-bottom: 0.5px solid #bdbdbd;
+  background: none;
+  margin-left: 10px;
+}
