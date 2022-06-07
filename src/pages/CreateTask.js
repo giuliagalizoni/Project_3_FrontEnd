@@ -5,6 +5,7 @@ import { useState } from "react";
 import FormControl from "../components/control/FormControl";
 import SelectControl from "../components/control/SelectControl";
 
+
 const field = [
   { value: 0, label: "Work" },
   { value: 1, label: "Home" },
@@ -21,8 +22,10 @@ const weekDay = [
   { value: 6, label: "Sat" },
 ];
 
+
+
 function CreateTask() {
-  const [state, setState] = useState({
+    const [state, setState] = useState({
     name: "",
     steps: [],
     field: "",
