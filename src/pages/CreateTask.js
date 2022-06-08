@@ -62,6 +62,7 @@ function CreateTask() {
   function handleKeyDown(event) {
     const { inputValue, value } = selectStep;
     if (!inputValue) return;
+    // eslint-disable-next-line default-case
     switch (event.key) {
       case "Enter":
       case "Tab":
