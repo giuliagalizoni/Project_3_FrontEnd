@@ -7,41 +7,22 @@ import home from "../assets/img/Home.png";
 import add_task from "../assets/img/Add_task.png";
 
 function Navbar() {
-  
   const { handleLogout } = useContext(AuthContext);
 
   return (
     <nav>
-      <div className="container-fluid">
-        <Link className="navbar-brand" to="/">
-          <img
-            src={logo}
-            alt="logo"
-            width="60"
-            height="48"
-            className="d-inline-block "
-          />
+      <Link to="/">
+        <img src={logo} alt="logo" width="60" height="48" />
+      </Link>
+      <div>
+        <Link to="/">
+          <img src={home} alt="home" width="60" height="60" />
         </Link>
-        <Link className="navbar-brand" to="/">
-          <img
-            src={home}
-            alt="home"
-            width="60"
-            height="60"
-            className="d-inline-block "
-          />
+        <Link to="/create_task">
+          <img src={add_task} alt="Add Task" width="60" height="60" />
         </Link>
-        <Link className="navbar-brand" to="/create_task">
-          <img
-            src={add_task}
-            alt="Add Task"
-            width="60"
-            height="60"
-            className="d-inline-block "
-          />
-        </Link>
-        <button onClick={handleLogout}>Logout</button>
       </div>
+      <button onClick={handleLogout}>Logout</button>
     </nav>
   );
 }
