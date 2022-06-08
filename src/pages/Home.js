@@ -1,11 +1,13 @@
 import React from "react";
 import Calendar from "../components/Calendar";
 import Navbar from "../components/Navbar";
-import no_task from "../assets/img/no_task.png"
+import no_task from "../assets/img/no_task.png";
 import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../contexts/authContext";
 import { format } from "date-fns";
 import api from "../apis/api";
+
+import "./home.css";
 
 function Home() {
   const { loggedInUser } = useContext(AuthContext);
@@ -35,22 +37,63 @@ function Home() {
   }
 
   return (
-    <div>
+    <div className="container">
       <Navbar />
+
       <div className="text-center">
         <h1> Welcome {loggedInUser.user.name}</h1>
       </div>
-      <Calendar onClick={handleDayClick} active={active} />
+
+      <div>
+        <Calendar onClick={handleDayClick} active={active} />
+      </div>
+
       {!state.length ? (
         <div>
-          <img src={no_task} alt="sem task"/>
-          <p>Pressione o “ + “ no menu abaixo 
-e comece suas tarefas</p>
+          <img src={no_task} alt="sem task" />
+          <p>Press “ + “ in the menu and create your tasks</p>
         </div>
       ) : (
         <div>
           {state.map((task) => {
-            return task.name;
+            const {
+              _id,
+              name,
+              steps,
+              field,
+              date,
+              weekday,
+              starttime,
+              endtime,
+              comments,
+            } = task;
+            return (
+              <div key={_id}>
+                <div>
+                  <h2>{name}</h2>
+                  <button>Start</button>
+                </div>
+                <div>
+                  <small>Steps:</small>
+                  <ul>
+                    {steps.map((step) => (
+                      <li>{step.description}</li>
+                    ))}
+                  </ul>
+                  <small>Start your task and don't forget to check it!</small>
+                </div>
+                <div>Progress:</div>
+                <div>
+                  <p>
+                    {starttime} - {endtime}
+                  </p>
+                  <p>{date}</p>
+                  {/* trocar por icons */}
+                  <button>delete</button>
+                  <button>edit</button>
+                </div>
+              </div>
+            );
           })}
         </div>
       )}
