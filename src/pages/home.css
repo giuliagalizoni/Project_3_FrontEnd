@@ -1,0 +1,183 @@
+/* css dos cards */
+
+.header {
+  /* align-self: flex-start; */
+  /* margin-left: 20px; */
+
+  width: 379px;
+  margin-top: 50px;
+}
+
+.header h1 {
+  color: #4f4f4f;
+  font-weight: 800;
+  font-size: 24px;
+  margin: 0;
+}
+.tasks-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+h2 {
+  margin: 10px 0;
+  padding: 10px;
+  width: 141px;
+
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 16px;
+  letter-spacing: 0.1px;
+  text-align: center;
+
+  color: #f2f2f2;
+
+  background: #5d83fd;
+  border-radius: 10px;
+}
+.taskcards-group {
+  overflow-y: auto;
+  height: 537px;
+
+  /* display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center; */
+}
+
+.taskcards-group::-webkit-scrollbar {
+  display: none;
+}
+.task-card {
+  display: flex;
+  flex-direction: column;
+
+  background-color: #d7e0ff;
+  border-radius: 2px;
+  width: 359px;
+  margin: 15px;
+  padding: 10px;
+}
+
+.urgent {
+  border-left: 5px solid #ff6069;
+}
+
+.not-urgent {
+  border-left: 5px solid #fba132;
+}
+
+.task-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.task-top h3 {
+  margin: 0;
+
+  font-weight: 800;
+  font-size: 20px;
+  line-height: 16px;
+  letter-spacing: 0.1px;
+
+  color: #2b69f5;
+}
+
+.start-btn {
+  width: 68.91px;
+  height: 31px;
+  border: none;
+  padding: 8px 18px;
+  gap: 10px;
+  background-color: #5d83fd;
+  border-radius: 5px;
+
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 108.1%;
+  letter-spacing: 0.05em;
+  color: #fff;
+
+  cursor: pointer;
+}
+
+.steps div {
+  display: flex;
+}
+
+.step-item {
+  display: flex;
+  align-items: center;
+
+  margin-left: 2px;
+  padding: 10px;
+
+  background-color: #e0e8fe;
+  border-radius: 20px;
+}
+
+.step-item p {
+  margin: 0 0 0 10px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 20px;
+  letter-spacing: 0.01em;
+  font-feature-settings: "pnum" on, "lnum" on;
+  color: #4a4a4a;
+}
+
+.status {
+  width: 6px;
+  height: 6px;
+  background: #de3626;
+  border-radius: 50%;
+}
+
+.steps-text {
+  margin-left: 10px;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  letter-spacing: 0.1px;
+  color: #4f4f4f;
+}
+
+.task-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.icon-text-box {
+  display: flex;
+  align-items: center;
+}
+
+.date-time {
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: 0.1px;
+  color: #4f4f4f;
+
+  margin: 0 5px;
+}
+
+.icon-btn {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.notasks-img {
+  margin-top: 20px;
+}
+
+.notasks-msg {
+  margin-top: 20px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+
+  text-align: center;
+}

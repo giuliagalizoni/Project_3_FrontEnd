@@ -3,8 +3,8 @@ import "../pages/auth/auth.css";
 import { useContext } from "react";
 import { AuthContext } from "../contexts/authContext";
 import logo from "../assets/img/Logo_Option_1.png";
-import home from "../assets/img/Home.png";
-import add_task from "../assets/img/Add_task.png";
+import home from "../assets/img/icons/Home.png";
+import add_task from "../assets/img/icons/Add_task.png";
 
 function Navbar() {
   const { handleLogout } = useContext(AuthContext);

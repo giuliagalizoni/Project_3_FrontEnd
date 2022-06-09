@@ -2,6 +2,12 @@ import React from "react";
 import Calendar from "../components/Calendar";
 import Navbar from "../components/Navbar";
 import no_task from "../assets/img/no_task.png";
+
+import clock from "../assets/img/icons/clock.svg";
+import calendar from "../assets/img/icons/calendar.svg";
+import check from "../assets/img/icons/check.svg";
+import trashcan from "../assets/img/icons/delete.svg";
+
 import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../contexts/authContext";
 import { format } from "date-fns";
@@ -21,7 +27,6 @@ function Home() {
       try {
         const response = await api.get(`/tasks/${active}`, {});
         setState([...response.data]);
-        console.log(response.data);
       } catch (err) {
         console.error(err);
       }
@@ -31,72 +36,84 @@ function Home() {
 
   function handleDayClick({ target }) {
     setActive(target.value);
-    console.log(active);
-
     // fazer o api.get aqui
   }
 
   return (
     <div className="container">
       <Navbar />
-
-      <div className="text-center">
-        <h1> Welcome {loggedInUser.user.name}</h1>
+      <div className="header">
+        <h1> Welcome, {loggedInUser.user.name}!</h1>
       </div>
 
       <div>
         <Calendar onClick={handleDayClick} active={active} />
       </div>
 
-      {!state.length ? (
-        <div>
-          <img src={no_task} alt="sem task" />
-          <p>Press “ + “ in the menu and create your tasks</p>
-        </div>
-      ) : (
-        <div>
-          {state.map((task) => {
-            const {
-              _id,
-              name,
-              steps,
-              field,
-              date,
-              weekday,
-              starttime,
-              endtime,
-              comments,
-            } = task;
-            return (
-              <div key={_id}>
-                <div>
-                  <h2>{name}</h2>
-                  <button>Start</button>
+      <div className="tasks-container">
+        <h2>Tarefas</h2>
+        {!state.length ? (
+          <div className="taskcards-group">
+            <img className="notasks-img" src={no_task} alt="sem task" />
+            <p className="notasks-msg">
+              Press “ + “ in the menu and create your tasks
+            </p>
+          </div>
+        ) : (
+          <div className="taskcards-group">
+            {state.map((task) => {
+              const { _id, name, steps, date, starttime, endtime } = task;
+              return (
+                <div key={_id} className="task-card urgent">
+                  {/* setar logica pra mudar de urgent pra not-urgent conforme a hora */}
+                  <div className="task-top">
+                    <h3>{name}</h3>
+                    <button className="start-btn">Start</button>
+                  </div>
+                  <div className="steps">
+                    <div className="icon-text-box">
+                      <img src={check} />
+                      <p className="steps-text">Steps:</p>
+                    </div>
+                    <div>
+                      {steps.map((step) => (
+                        <div key={step._id} className="step-item">
+                          <div className="status" />
+                          <p>{step.description}</p>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="icon-text-box">
+                      <img src={check} />
+                      <p className="steps-text">
+                        Start your task and don't forget to check it!
+                      </p>
+                    </div>
+                  </div>
+                  {/* <div>Progress:</div> */}
+                  <div className="task-bottom">
+                    <div className="icon-text-box">
+                      <img src={clock} alt="Clock icon" />
+                      <p className="date-time">
+                        {starttime} - {endtime}
+                      </p>
+                      <img src={calendar} alt="Calendar icon" />
+                      <p className="date-time">{date}</p>
+                    </div>
+                    {/* trocar por icons */}
+                    <div className="icon-btns">
+                      <button className="icon-btn"> edt </button>
+                      <button className="icon-btn">
+                        <img src={trashcan} />
+                      </button>
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <small>Steps:</small>
-                  <ul>
-                    {steps.map((step) => (
-                      <li>{step.description}</li>
-                    ))}
-                  </ul>
-                  <small>Start your task and don't forget to check it!</small>
-                </div>
-                <div>Progress:</div>
-                <div>
-                  <p>
-                    {starttime} - {endtime}
-                  </p>
-                  <p>{date}</p>
-                  {/* trocar por icons */}
-                  <button>delete</button>
-                  <button>edit</button>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      )}
+              );
+            })}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
