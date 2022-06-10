@@ -7,7 +7,7 @@ function BackBtn() {
 
   return (
     <button className="back-btn" onClick={() => navigate(-1)}>
-      <img src={back} />
+      <img src={back} alt="back" />
     </button>
   );
 }

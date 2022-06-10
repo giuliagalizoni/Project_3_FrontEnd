@@ -7,6 +7,7 @@ import clock from "../assets/img/icons/clock.svg";
 import calendar from "../assets/img/icons/calendar.svg";
 import check from "../assets/img/icons/check.svg";
 import trashcan from "../assets/img/icons/delete.svg";
+import editbutton from "../assets/img/icons/editbutton.png"
 
 import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../contexts/authContext";
@@ -72,7 +73,7 @@ function Home() {
                   </div>
                   <div className="steps">
                     <div className="icon-text-box">
-                      <img src={check} />
+                      <img src={check} alt="check" />
                       <p className="steps-text">Steps:</p>
                     </div>
                     <div className="step-list">
@@ -84,7 +85,7 @@ function Home() {
                       ))}
                     </div>
                     <div className="icon-text-box">
-                      <img src={check} />
+                      <img src={check} alt="check" />
                       <p className="steps-text">
                         Start your task and don't forget to check it!
                       </p>
@@ -102,9 +103,9 @@ function Home() {
                     </div>
                     {/* trocar por icons */}
                     <div className="icon-btns">
-                      <button className="icon-btn"> edt </button>
+                      <button className="icon-btn"> <img src={editbutton} alt="edit"/> </button>
                       <button className="icon-btn">
-                        <img src={trashcan} />
+                        <img src={trashcan} alt="delete"/>
                       </button>
                     </div>
                   </div>
