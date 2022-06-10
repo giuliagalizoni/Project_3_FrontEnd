@@ -1,11 +1,10 @@
 /* css dos cards */
 
 .header {
-  /* align-self: flex-start; */
-  /* margin-left: 20px; */
-
   width: 379px;
-  margin-top: 50px;
+  margin-top: 110px;
+  margin-left: 30px;
+  align-self: flex-start;
 }
 
 .header h1 {
@@ -18,6 +17,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  width: 90%;
 }
 h2 {
   margin: 10px 0;
@@ -39,10 +40,12 @@ h2 {
   overflow-y: auto;
   height: 537px;
 
-  /* display: flex;
+  width: 100%;
+
+  display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: center; */
+  align-items: center;
 }
 
 .taskcards-group::-webkit-scrollbar {
@@ -54,8 +57,8 @@ h2 {
 
   background-color: #d7e0ff;
   border-radius: 2px;
-  width: 359px;
-  margin: 15px;
+  width: 85%;
+  margin: 15px 0 0 0;
   padding: 10px;
 }
 
@@ -106,12 +109,17 @@ h2 {
   display: flex;
 }
 
+.step-list {
+  display: flex;
+  flex-wrap: wrap;
+}
 .step-item {
   display: flex;
   align-items: center;
 
   margin-left: 2px;
-  padding: 10px;
+  margin-top: 2px;
+  padding: 8px;
 
   background-color: #e0e8fe;
   border-radius: 20px;
@@ -171,6 +179,7 @@ h2 {
 
 .notasks-img {
   margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .notasks-msg {
@@ -180,4 +189,20 @@ h2 {
   line-height: 24px;
 
   text-align: center;
+}
+
+@media only screen and (min-width: 768px) {
+  .taskcards-group {
+    height: 600px;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .taskcards-group {
+    height: 400px;
+  }
+
+  .header {
+    margin-top: 0;
+  }
 }

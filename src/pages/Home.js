@@ -51,7 +51,7 @@ function Home() {
       </div>
 
       <div className="tasks-container">
-        <h2>Tarefas</h2>
+        <h2>Tasks</h2>
         {!state.length ? (
           <div className="taskcards-group">
             <img className="notasks-img" src={no_task} alt="sem task" />
@@ -75,7 +75,7 @@ function Home() {
                       <img src={check} />
                       <p className="steps-text">Steps:</p>
                     </div>
-                    <div>
+                    <div className="step-list">
                       {steps.map((step) => (
                         <div key={step._id} className="step-item">
                           <div className="status" />

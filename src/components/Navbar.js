@@ -14,7 +14,7 @@ function Navbar() {
       <Link to="/">
         <img src={logo} alt="logo" width="60" height="48" />
       </Link>
-      <div>
+      <div className="centralize">
         <Link to="/">
           <img src={home} alt="home" width="60" height="60" />
         </Link>
@@ -22,7 +22,9 @@ function Navbar() {
           <img src={add_task} alt="Add Task" width="60" height="60" />
         </Link>
       </div>
-      <button onClick={handleLogout}>Logout</button>
+      <button className="logout-btn" onClick={handleLogout}>
+        Logout
+      </button>
     </nav>
   );
 }
