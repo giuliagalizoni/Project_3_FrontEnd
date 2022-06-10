@@ -72,7 +72,7 @@ h1 {
   text-transform: uppercase;
 }
 
-@media only screen and (min-width: 768px) {
+/* @media only screen and (min-width: 768px) {
   body {
     background-image: url("../../assets/img/Background-web.png");
     background-repeat: no-repeat;
@@ -106,4 +106,4 @@ h1 {
   .carousel {
     display: flex;
   }
-}
+} */

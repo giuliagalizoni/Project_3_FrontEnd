@@ -26,15 +26,32 @@ nav {
   position: fixed;
   top: 0;
   width: 100%;
-  /* height: 100%; */
+  height: 65px;
+
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.logout-btn {
+  margin: 5px;
+  padding: 5px;
+  border: none;
+  background: none;
+
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 22px;
+  color: #4f4f4f;
+
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .container {
   font-family: "Inter", sans-serif;
-  height: 926px;
+  height: 776px;
   width: 428px;
   padding: 0;
 
@@ -53,8 +70,8 @@ nav {
   }
 
   .container {
-    padding-left: 10px;
-    padding-right: 10px;
+    width: 768px;
+    height: 876px;
   }
 }
 
@@ -66,17 +83,31 @@ nav {
     background-position: center;
   }
 
+  .container {
+    height: 716px;
+  }
+
   nav {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100px;
-    height: 926px;
+    width: 82px;
+    height: 100%;
+
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
+
     padding-top: 5px;
     padding-bottom: 5px;
+
+    border: 1px solid #e0e0e0;
+  }
+  .centralize {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 }
 
@@ -88,16 +119,25 @@ nav {
     background-position: center;
   }
 
+  .container {
+    height: 716px;
+  }
+
   nav {
     position: fixed;
     top: 0;
     left: 0;
     width: 100px;
-    height: 926px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     padding-top: 5px;
     padding-bottom: 5px;
+  }
+
+  .centralize {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 }
