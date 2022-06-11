@@ -2,12 +2,13 @@ import React from "react";
 import Calendar from "../components/Calendar";
 import Navbar from "../components/Navbar";
 import no_task from "../assets/img/no_task.png";
+import DeleteBtn from "../components/Deletebtn";
 
 import clock from "../assets/img/icons/clock.svg";
 import calendar from "../assets/img/icons/calendar.svg";
 import check from "../assets/img/icons/check.svg";
 import trashcan from "../assets/img/icons/delete.svg";
-import editbutton from "../assets/img/icons/editbutton.png"
+import editbutton from "../assets/img/icons/editbutton.png";
 
 import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../contexts/authContext";
@@ -103,10 +104,11 @@ function Home() {
                     </div>
                     {/* trocar por icons */}
                     <div className="icon-btns">
-                      <button className="icon-btn"> <img src={editbutton} alt="edit"/> </button>
                       <button className="icon-btn">
-                        <img src={trashcan} alt="delete"/>
+                        {" "}
+                        <img src={editbutton} alt="edit" />{" "}
                       </button>
+                      <DeleteBtn _id={_id} />
                     </div>
                   </div>
                 </div>
