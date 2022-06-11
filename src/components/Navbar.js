@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import "../pages/auth/auth.css";
 import { useContext } from "react";
 import { AuthContext } from "../contexts/authContext";
+
 import logo from "../assets/img/Logo_Option_1.png";
 import home from "../assets/img/icons/Home.png";
 import add_task from "../assets/img/icons/Add_task.png";
@@ -10,11 +11,11 @@ function Navbar() {
   const { handleLogout } = useContext(AuthContext);
 
   return (
-    <nav>
+    <nav className="nav">
       <Link to="/">
         <img src={logo} alt="logo" width="60" height="48" />
       </Link>
-      <div className="centralize">
+      <div className="center-btns">
         <Link to="/">
           <img src={home} alt="home" width="60" height="60" />
         </Link>
