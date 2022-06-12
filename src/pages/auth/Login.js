@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import api from "../../apis/api";
+
 import logo from "../../assets/img/Logo_Option_1.png";
 import colaborative from "../../assets/img/colaborative.svg";
 
@@ -65,32 +66,34 @@ function Login(props) {
           <img src={logo} alt="logo" />
         </div>
         <form className="form" onSubmit={handleSubmit}>
-          <div>
-            {/* <label htmlFor="signupFormEmail">E-mail Address</label> */}
+          <div className="input-auth-group">
             <input
               className="input-auth"
-              placeholder="Email"
+              // placeholder="Email"
               type="email"
               name="email"
               id="signupFormEmail"
               value={state.email}
               error={errors.email}
               onChange={handleChange}
+              required
             />
+            <label htmlFor="signupFormEmail">Email </label>
           </div>
 
-          <div>
-            {/* <label htmlFor="signupFormPassword">Password</label> */}
+          <div className="input-auth-group">
             <input
               className="input-auth"
-              placeholder="Password"
+              // placeholder="Password"
               type="password"
               name="password"
               id="signupFormPassword"
               value={state.password}
               error={errors.password}
               onChange={handleChange}
+              required
             />
+            <label htmlFor="signupFormPassword">Password</label>
           </div>
 
           <div className="btn-container">

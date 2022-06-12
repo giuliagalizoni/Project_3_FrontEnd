@@ -15,7 +15,7 @@ function DeleteBtn(props) {
   }
 
   return (
-    <button className="delete-btn" onClick={handleDeleteBtn}>
+    <button className="icon-btn" onClick={handleDeleteBtn}>
       <img src={trashcan} alt="back" />
     </button>
   );

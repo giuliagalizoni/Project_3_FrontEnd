@@ -1,13 +1,13 @@
 import React from "react";
 import Calendar from "../components/Calendar";
 import Navbar from "../components/Navbar";
-import no_task from "../assets/img/no_task.png";
+import NavBottom from "../components/NavBottom";
 import DeleteBtn from "../components/Deletebtn";
 
+import no_task from "../assets/img/no_task.png";
 import clock from "../assets/img/icons/clock.svg";
 import calendar from "../assets/img/icons/calendar.svg";
 import check from "../assets/img/icons/check.svg";
-import trashcan from "../assets/img/icons/delete.svg";
 import editbutton from "../assets/img/icons/editbutton.png";
 
 import { useState, useContext, useEffect } from "react";
@@ -42,80 +42,84 @@ function Home() {
   }
 
   return (
-    <div className="container">
-      <Navbar />
-      <div className="header">
-        <h1> Welcome, {loggedInUser.user.name}!</h1>
-      </div>
+    // Div web-container criada apenas para organizar o layout responsivo
+    <div className="web-container">
+      <div className="container">
+        <Navbar />
+        <div className="header">
+          <h1> Welcome, {loggedInUser.user.name}!</h1>
+        </div>
 
-      <div>
-        <Calendar onClick={handleDayClick} active={active} />
-      </div>
+        <div>
+          <Calendar onClick={handleDayClick} active={active} />
+        </div>
 
-      <div className="tasks-container">
-        <h2>Tasks</h2>
-        {!state.length ? (
-          <div className="taskcards-group">
-            <img className="notasks-img" src={no_task} alt="sem task" />
-            <p className="notasks-msg">
-              Press “ + “ in the menu and create your tasks
-            </p>
-          </div>
-        ) : (
-          <div className="taskcards-group">
-            {state.map((task) => {
-              const { _id, name, steps, date, starttime, endtime } = task;
-              return (
-                <div key={_id} className="task-card urgent">
-                  {/* setar logica pra mudar de urgent pra not-urgent conforme a hora */}
-                  <div className="task-top">
-                    <h3>{name}</h3>
-                    <button className="start-btn">Start</button>
+        <div className="tasks-container">
+          <h2>Tasks</h2>
+          {!state.length ? (
+            <div className="taskcards-group">
+              <img className="notasks-img" src={no_task} alt="sem task" />
+              <p className="notasks-msg">
+                Press “ + “ in the menu and create your tasks
+              </p>
+            </div>
+          ) : (
+            <div className="taskcards-group">
+              {state.map((task) => {
+                const { _id, name, steps, date, starttime, endtime } = task;
+                return (
+                  <div key={_id} className="task-card urgent">
+                    {/* setar logica pra mudar de urgent pra not-urgent conforme a hora */}
+                    <div className="task-top">
+                      <h3>{name}</h3>
+                      <button className="start-btn">Start</button>
+                    </div>
+                    <div className="steps">
+                      <div className="icon-text-box">
+                        <img src={check} alt="check" />
+                        <p className="steps-text">Steps:</p>
+                      </div>
+                      <div className="step-list">
+                        {steps.map((step) => (
+                          <div key={step._id} className="step-item">
+                            <div className="status" />
+                            <p>{step.description}</p>
+                          </div>
+                        ))}
+                      </div>
+                      <div className="icon-text-box">
+                        <img src={check} alt="check" />
+                        <p className="steps-text">
+                          Start your task and don't forget to check it!
+                        </p>
+                      </div>
+                    </div>
+                    {/* <div>Progress:</div> */}
+                    <div className="task-bottom">
+                      <div className="icon-text-box">
+                        <img src={clock} alt="Clock icon" />
+                        <p className="date-time">
+                          {starttime} - {endtime}
+                        </p>
+                        <img src={calendar} alt="Calendar icon" />
+                        <p className="date-time">{date}</p>
+                      </div>
+                      {/* trocar por icons */}
+                      <div className="icon-btns">
+                        <button className="icon-btn">
+                          {" "}
+                          <img src={editbutton} alt="edit" />{" "}
+                        </button>
+                        <DeleteBtn _id={_id} />
+                      </div>
+                    </div>
                   </div>
-                  <div className="steps">
-                    <div className="icon-text-box">
-                      <img src={check} alt="check" />
-                      <p className="steps-text">Steps:</p>
-                    </div>
-                    <div className="step-list">
-                      {steps.map((step) => (
-                        <div key={step._id} className="step-item">
-                          <div className="status" />
-                          <p>{step.description}</p>
-                        </div>
-                      ))}
-                    </div>
-                    <div className="icon-text-box">
-                      <img src={check} alt="check" />
-                      <p className="steps-text">
-                        Start your task and don't forget to check it!
-                      </p>
-                    </div>
-                  </div>
-                  {/* <div>Progress:</div> */}
-                  <div className="task-bottom">
-                    <div className="icon-text-box">
-                      <img src={clock} alt="Clock icon" />
-                      <p className="date-time">
-                        {starttime} - {endtime}
-                      </p>
-                      <img src={calendar} alt="Calendar icon" />
-                      <p className="date-time">{date}</p>
-                    </div>
-                    {/* trocar por icons */}
-                    <div className="icon-btns">
-                      <button className="icon-btn">
-                        {" "}
-                        <img src={editbutton} alt="edit" />{" "}
-                      </button>
-                      <DeleteBtn _id={_id} />
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        )}
+                );
+              })}
+            </div>
+          )}
+        </div>
+        <NavBottom />
       </div>
     </div>
   );
