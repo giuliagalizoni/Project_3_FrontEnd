@@ -4,8 +4,9 @@ import { useContext } from "react";
 import { AuthContext } from "../contexts/authContext";
 
 import logo from "../assets/img/Logo_Option_1.png";
-import home from "../assets/img/icons/Home.png";
-import add_task from "../assets/img/icons/Add_task.png";
+import home from "../assets/img/icons/home.svg";
+import addtask from "../assets/img/icons/addtask.svg";
+import logout from "../assets/img/icons/logout.svg";
 
 function Navbar() {
   const { handleLogout } = useContext(AuthContext);
@@ -16,15 +17,15 @@ function Navbar() {
         <img src={logo} alt="logo" width="60" height="48" />
       </Link>
       <div className="center-btns">
-        <Link to="/">
-          <img src={home} alt="home" width="60" height="60" />
+        <Link to="/" className="nav-btns">
+          <img src={home} alt="home" />
         </Link>
-        <Link to="/create_task">
-          <img src={add_task} alt="Add Task" width="60" height="60" />
+        <Link to="/create_task" className="nav-btns">
+          <img src={addtask} alt="Add Task" />
         </Link>
       </div>
-      <button className="logout-btn" onClick={handleLogout}>
-        Logout
+      <button className="nav-btns" onClick={handleLogout}>
+        <img src={logout} alt="Logout button" />
       </button>
     </nav>
   );
