@@ -1,16 +1,16 @@
 import { Link } from "react-router-dom";
 
-import home from "../assets/img/icons/Home.png";
-import add_task from "../assets/img/icons/Add_task.png";
+import home from "../assets/img/icons/home.svg";
+import addtask from "../assets/img/icons/addtask.svg";
 
 function NavBottom() {
   return (
     <nav className="nav-bottom">
-      <Link to="/">
-        <img src={home} alt="home" width="60" height="60" />
+      <Link to="/" className="nav-btns">
+        <img src={home} alt="home" />
       </Link>
-      <Link to="/create_task">
-        <img src={add_task} alt="Add Task" width="60" height="60" />
+      <Link to="/create_task" className="nav-btns">
+        <img src={addtask} alt="Add Task" />
       </Link>
     </nav>
   );
