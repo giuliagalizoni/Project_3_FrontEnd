@@ -109,6 +109,7 @@ function CreateTask() {
           onChange={handleChange}
           value={state.name}
           placeholder="Task Name"
+          max="200"
         />
 
         {/* <FormControl

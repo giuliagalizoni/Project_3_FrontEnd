@@ -28,6 +28,8 @@ function Login(props) {
       ...state,
       [event.currentTarget.name]: event.currentTarget.value,
     });
+    validate();
+    console.log(errors.email, errors.password);
   }
 
   async function handleSubmit(event) {
@@ -47,6 +49,29 @@ function Login(props) {
     } catch (err) {
       console.error(err.response);
       setErrors({ ...err.response.data.errors });
+    }
+  }
+
+  // tentando fazer validação em tempo real
+  function validate() {
+    if (!state.email.match(/[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/gm)) {
+      setErrors({ ...errors, email: "Please type a valid email adress" });
+    } else {
+      setErrors({ ...errors, email: null });
+    }
+
+    if (
+      !state.password.match(
+        /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/gm
+      )
+    ) {
+      setErrors({
+        ...errors,
+        password:
+          "Your password must have at least 8 characters including one number and one special character",
+      });
+    } else {
+      setErrors({ ...errors, password: null });
     }
   }
 
@@ -79,6 +104,9 @@ function Login(props) {
               required
             />
             <label htmlFor="signupFormEmail">Email </label>
+            {errors.email && (
+              <small style={{ color: "red" }}>{errors.email}</small>
+            )}
           </div>
 
           <div className="input-auth-group">
@@ -94,6 +122,9 @@ function Login(props) {
               required
             />
             <label htmlFor="signupFormPassword">Password</label>
+            {errors.password && (
+              <small style={{ color: "red" }}>{errors.password}</small>
+            )}
           </div>
 
           <div className="btn-container">
