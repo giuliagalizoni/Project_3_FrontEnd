@@ -39,8 +39,8 @@ h2 {
 .taskcards-group {
   overflow-y: auto;
   height: 437px;
-
   width: 100%;
+  margin-bottom: 86px;
 
   display: flex;
   flex-direction: column;
