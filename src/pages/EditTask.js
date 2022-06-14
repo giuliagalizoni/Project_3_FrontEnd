@@ -1,13 +1,11 @@
-import React from "react";
-
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import CreatableSelect from "react-select/creatable";
 import { format } from "date-fns";
 
+import api from "../apis/api";
 import "./taskForms.css";
 
-import { useNavigate } from "react-router-dom";
-import api from "../apis/api";
-import { useState } from "react";
 import FormControl from "../components/control/FormControl";
 import SelectControl from "../components/control/SelectControl";
 import BackBtn from "../components/BackBtn";
@@ -37,7 +35,7 @@ const createOption = (label) => ({
   value: label,
 });
 
-function CreateTask() {
+function EditTask() {
   const [state, setState] = useState({
     name: "",
     steps: [],
@@ -52,6 +50,29 @@ function CreateTask() {
   const [selectStep, setSelectStep] = useState({ inputValue: "", value: [] });
 
   const navigate = useNavigate();
+  const { id } = useParams();
+
+  useEffect(() => {
+    async function fetchTask() {
+      try {
+        const response = await api.get(`/task/${id}`);
+
+        // let stepsArr = [];
+        // response.data.steps.map((step) => stepsArr.push(step.description));
+
+        // console.log(stepsArr);
+        // console.log(selectStep.value);
+
+        // setSelectStep({ ...selectStep, value: [...stepsArr] });
+        // console.log(selectStep);
+
+        setState({ ...response.data });
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    fetchTask();
+  }, [id]);
 
   function handleInputChange(inputValue) {
     setSelectStep({ ...selectStep, inputValue });
@@ -70,7 +91,6 @@ function CreateTask() {
           value: [...value, createOption(inputValue)],
         });
         event.preventDefault();
-        console.log(selectStep);
     }
   }
 
@@ -82,13 +102,19 @@ function CreateTask() {
       return;
     }
     setState({ ...state, [event.target.name]: event.target.value });
+
+    console.log(state, selectStep);
   }
 
   async function handleSubmit(event) {
     event.preventDefault();
+
     try {
-      const response = await api.post("/task", {
-        ...state,
+      const data = { ...state };
+      delete data._id;
+
+      const response = await api.patch(`/task/${id}`, {
+        ...data,
         steps: selectStep.value,
       });
       console.log(response.data);
@@ -221,4 +247,4 @@ function CreateTask() {
   );
 }
 
-export default CreateTask;
+export default EditTask;
