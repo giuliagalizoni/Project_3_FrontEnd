@@ -11,6 +11,7 @@ import check from "../assets/img/icons/check.svg";
 import editbutton from "../assets/img/icons/editbutton.png";
 
 import { useState, useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/authContext";
 import { format } from "date-fns";
 import api from "../apis/api";
@@ -21,8 +22,9 @@ function Home() {
   const { loggedInUser } = useContext(AuthContext);
 
   const [active, setActive] = useState(format(new Date(), "yyyy-MM-dd"));
-
   const [state, setState] = useState([]);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchData() {
@@ -106,8 +108,10 @@ function Home() {
                       </div>
                       {/* trocar por icons */}
                       <div className="icon-btns">
-                        <button className="icon-btn">
-                          {" "}
+                        <button
+                          className="icon-btn"
+                          onClick={() => navigate(`/edit_task/${_id}`)}
+                        >
                           <img src={editbutton} alt="edit" />{" "}
                         </button>
                         <DeleteBtn _id={_id} />
