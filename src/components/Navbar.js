@@ -8,8 +8,13 @@ import home from "../assets/img/icons/home.svg";
 import addtask from "../assets/img/icons/addtask.svg";
 import logout from "../assets/img/icons/logout.svg";
 
-function Navbar() {
+
+function Navbar(props) {
   const { handleLogout } = useContext(AuthContext);
+
+  const handleaddtask = () =>{
+    props.setShowCreateTask(true)
+  }
 
   return (
     <nav className="nav">
@@ -20,9 +25,12 @@ function Navbar() {
         <Link to="/" className="nav-btns">
           <img src={home} alt="home" />
         </Link>
-        <Link to="/create_task" className="nav-btns">
+        {/* <Link to="/create_task" className="nav-btns">
           <img src={addtask} alt="Add Task" />
-        </Link>
+        </Link> */}
+        <button className="nav-btns" onClick={handleaddtask}>
+        <img src={addtask} alt="Add Task" />
+      </button>
       </div>
       <button className="nav-btns" onClick={handleLogout}>
         <img src={logout} alt="Logout button" />
