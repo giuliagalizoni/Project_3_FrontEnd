@@ -8,7 +8,7 @@ import no_task from "../assets/img/no_task.png";
 import clock from "../assets/img/icons/clock.svg";
 import calendar from "../assets/img/icons/calendar.svg";
 import check from "../assets/img/icons/check.svg";
-import editbutton from "../assets/img/icons/editbutton.png";
+import editbutton from "../assets/img/icons/edit.svg";
 
 import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -112,7 +112,7 @@ function Home() {
                           className="icon-btn"
                           onClick={() => navigate(`/edit_task/${_id}`)}
                         >
-                          <img src={editbutton} alt="edit" />{" "}
+                          <img src={editbutton} alt="Edit task" />
                         </button>
                         <DeleteBtn _id={_id} />
                       </div>

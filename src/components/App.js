@@ -9,6 +9,7 @@ import Login from "../pages/auth/Login";
 import ProtectedRoute from "../pages/auth/ProtectedRoute";
 import CreateTask from "../pages/CreateTask";
 import EditTask from "../pages/EditTask";
+import Error from "../pages/Error";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
+          <Route path="*" element={<Error />} />
         </Routes>
       </AuthContextComponent>
     </div>
