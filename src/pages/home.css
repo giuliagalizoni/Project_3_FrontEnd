@@ -57,7 +57,7 @@ h2 {
 
   background-color: #d7e0ff;
   border-radius: 2px;
-  width: 85%;
+  width: 90%;
   margin: 15px 0 0 0;
   padding: 10px;
 }
@@ -200,6 +200,7 @@ h2 {
 @media only screen and (min-width: 992px) {
   .taskcards-group {
     height: 400px;
+    margin-bottom: 0;
   }
 
   .header {
