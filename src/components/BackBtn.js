@@ -6,7 +6,7 @@ function BackBtn() {
   const navigate = useNavigate();
 
   return (
-    <button className="back-btn" onClick={() => navigate(-1)}>
+    <button className="back-btn nav-btns" onClick={() => navigate(-1)}>
       <img src={back} alt="back" />
     </button>
   );

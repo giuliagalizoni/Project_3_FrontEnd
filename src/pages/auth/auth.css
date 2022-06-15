@@ -28,7 +28,7 @@ h1 {
   flex-direction: column;
 }
 
-.input-auth-group label {
+.auth-label {
   order: -1;
   padding-left: 5px;
   transition: all 0.15s ease-in-out;
@@ -47,12 +47,12 @@ input:focus {
   border-bottom: 0.5px solid #3397f1;
 }
 
-input:focus + label {
+input:focus + .auth-label {
   transform: translateY(-2px) translateX(-20px) scale(0.9);
   color: #3397f1;
 }
 
-input:valid + label {
+input:valid + .auth-label {
   transform: translateY(-2px) translateX(-20px) scale(0.9);
 }
 
