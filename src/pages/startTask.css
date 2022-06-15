@@ -1,0 +1,163 @@
+.starttask-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  width: 100%;
+}
+
+.starttask-header h3 {
+  margin: 0;
+
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 16px;
+  letter-spacing: 0.1px;
+
+  color: #4f4f4f;
+}
+
+.starttask-top {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  margin-top: 10px;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+}
+
+.starttask-top h1 {
+  margin: 0;
+  font-weight: 500;
+  font-size: 24px;
+  letter-spacing: 0.1px;
+
+  color: #4f4f4f;
+}
+
+.starttask-top img {
+  width: 15px;
+  height: 15px;
+  padding: 10px;
+  border: 1px solid #2b69f5;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+.date-box {
+  box-sizing: border-box;
+  margin: 10px 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 6px 16px;
+  gap: 17px;
+
+  width: 80%;
+  height: 32px;
+
+  background: #dbecfb;
+  border: 1px solid #2b69f5;
+  border-radius: 20px;
+}
+
+.date-box p {
+  margin: 0;
+  box-sizing: border-box;
+
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 20px;
+
+  letter-spacing: 0.01em;
+  font-feature-settings: "pnum" on, "lnum" on;
+
+  color: #2b69f5;
+}
+
+.start-steps-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.step-checkbox-item {
+  display: flex;
+  /* justify-content: space-around; */
+  align-items: center;
+
+  margin: 10px 0;
+  width: 380px;
+  height: 56px;
+
+  background: #dbecfb;
+  border-radius: 5px;
+}
+
+.checkbox {
+  margin-right: 20px;
+  margin-left: 10px;
+  border: 1px solid #2b69f5;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  background: none;
+  appearance: none;
+
+  display: grid;
+  place-content: center;
+}
+
+.checkbox:focus {
+  border: 1px solid #2b69f5;
+}
+
+/* .checkbox::before {
+  content: "";
+  width: 1em;
+  height: 1em;
+  transform: scale(0);
+  transition: 100ms transform ease-in-out;
+  box-shadow: inset 1em 1em var(--form-control-color);
+
+  background-color: #2b69f5;
+  background-image: url("../assets/img/icons/check.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.checkbox:checked::before {
+  transform: scale(2.5);
+  border-radius: 50%;
+} */
+
+.checkbox:checked {
+  background-color: #2b69f5;
+  background-image: url("../assets/img/icons/Vectorwhite-check.svg");
+  background-image: -webkit-image-set();
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 15px;
+}
+
+.step-label {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0.01em;
+  font-feature-settings: "pnum" on, "lnum" on;
+
+  color: #828282;
+}
+
+@media only screen and (min-width: 992px) {
+  .starttask-header {
+    display: none;
+  }
+}

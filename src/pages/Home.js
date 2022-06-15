@@ -20,7 +20,6 @@ import api from "../apis/api";
 
 import "./home.css";
 
-
 function Home() {
   const { loggedInUser } = useContext(AuthContext);
 
@@ -28,6 +27,7 @@ function Home() {
   const [state, setState] = useState([]);
   const [showCreateTask, setShowCreateTask] = useState(false);
   const [showStartTask, setShowStartTask] = useState(false);
+  const [taskId, setTaskId] = useState("");
 
   const navigate = useNavigate();
 
@@ -47,9 +47,11 @@ function Home() {
     setActive(target.value);
     // fazer o api.get aqui
   }
-  const handlestarttask = () =>{
-    setShowStartTask(true)
-  }
+
+  const handleStartClick = (id) => {
+    setTaskId(...taskId, id);
+    setShowStartTask(true);
+  };
 
   return (
     // Div web-container criada apenas para organizar o layout responsivo
@@ -82,7 +84,15 @@ function Home() {
                     {/* setar logica pra mudar de urgent pra not-urgent conforme a hora */}
                     <div className="task-top">
                       <h3>{name}</h3>
-                      <button className="start-btn" onClick={() =>navigate(`/start_task/${_id}`)}>Start</button>
+                      <button
+                        className="start-btn"
+                        onClick={() => {
+                          handleStartClick(_id);
+                        }}
+                      >
+                        Start
+                      </button>
+                      {/* () =>navigate(`/start_task/${_id}`) */}
                     </div>
                     <div className="steps">
                       <div className="icon-text-box">
@@ -135,7 +145,7 @@ function Home() {
       </div>
       {showCreateTask && <CreateTask />}
       {/* {showCreateTask ? <CreateTask /> : null} */}
-      {showStartTask && <StartTask />}
+      {showStartTask && <StartTask id={taskId} />}
     </div>
   );
 }

@@ -28,8 +28,6 @@ function Login(props) {
       ...state,
       [event.currentTarget.name]: event.currentTarget.value,
     });
-    validate();
-    console.log(errors.email, errors.password);
   }
 
   async function handleSubmit(event) {
@@ -37,8 +35,6 @@ function Login(props) {
 
     try {
       const response = await api.post("/login", state);
-      console.log(response);
-
       authContext.setLoggedInUser({ ...response.data });
       localStorage.setItem(
         "loggedInUser",
@@ -53,13 +49,15 @@ function Login(props) {
   }
 
   // tentando fazer validação em tempo real
-  function validate() {
+  function validateEmail() {
     if (!state.email.match(/[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/gm)) {
       setErrors({ ...errors, email: "Please type a valid email adress" });
     } else {
       setErrors({ ...errors, email: null });
     }
+  }
 
+  function validatePassword() {
     if (
       !state.password.match(
         /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/gm
@@ -72,6 +70,16 @@ function Login(props) {
       });
     } else {
       setErrors({ ...errors, password: null });
+    }
+  }
+
+  function handleBlur(event) {
+    if (event.target.name === "email") {
+      validateEmail();
+    }
+
+    if (event.target.name === "password") {
+      validatePassword();
     }
   }
 
@@ -101,9 +109,12 @@ function Login(props) {
               value={state.email}
               error={errors.email}
               onChange={handleChange}
+              onBlur={handleBlur}
               required
             />
-            <label htmlFor="signupFormEmail">Email </label>
+            <label className="auth-label" htmlFor="signupFormEmail">
+              Email{" "}
+            </label>
             {errors.email && (
               <small style={{ color: "red" }}>{errors.email}</small>
             )}
@@ -119,9 +130,12 @@ function Login(props) {
               value={state.password}
               error={errors.password}
               onChange={handleChange}
+              onBlur={handleBlur}
               required
             />
-            <label htmlFor="signupFormPassword">Password</label>
+            <label className="auth-label" htmlFor="signupFormPassword">
+              Password
+            </label>
             {errors.password && (
               <small style={{ color: "red" }}>{errors.password}</small>
             )}
