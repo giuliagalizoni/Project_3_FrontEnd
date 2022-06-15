@@ -85,10 +85,17 @@ function Home() {
                     <div className="task-top">
                       <h3>{name}</h3>
                       <button
-                        className="start-btn"
+                        className="start-btn start-web"
                         onClick={() => {
                           handleStartClick(_id);
                         }}
+                      >
+                        Start
+                      </button>
+
+                      <button
+                        className="start-btn start-mobile"
+                        onClick={() => navigate(`/start_task/${_id}`)}
                       >
                         Start
                       </button>

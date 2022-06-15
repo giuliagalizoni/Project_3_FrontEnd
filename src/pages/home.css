@@ -105,6 +105,10 @@ h2 {
   cursor: pointer;
 }
 
+.start-web {
+  display: none;
+}
+
 .steps div {
   display: flex;
 }
@@ -205,5 +209,13 @@ h2 {
 
   .header {
     margin-top: 0;
+  }
+
+  .start-web {
+    display: block;
+  }
+
+  .start-mobile {
+    display: none;
   }
 }

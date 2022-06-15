@@ -23,12 +23,12 @@ function StartTask(props) {
 
   // const [weekday, setWeekday] = useState();
 
-  // const { id } = useParams();
+  const { id } = useParams();
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await api.get(`/task/${props.id}`, {});
+        const response = await api.get(`/task/${props.id ? props.id : id}`, {});
         setState({ ...response.data });
       } catch (err) {
         console.error(err);

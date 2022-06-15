@@ -95,13 +95,7 @@ body {
 }
 
 .side {
-  width: 400px;
-  border-left: 1px solid #bdbdbd;
-  padding: 10px 20px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  display: none;
 }
 
 @media only screen and (min-width: 768px) {
@@ -157,6 +151,16 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+  }
+
+  .side {
+    width: 400px;
+    border-left: 1px solid #bdbdbd;
+    padding: 10px 20px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
 }
 
