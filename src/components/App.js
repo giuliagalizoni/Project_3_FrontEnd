@@ -10,6 +10,8 @@ import ProtectedRoute from "../pages/auth/ProtectedRoute";
 import CreateTask from "../pages/CreateTask";
 import EditTask from "../pages/EditTask";
 import Error from "../pages/Error";
+import StartTask from "../pages/StartTask";
+
 
 function App() {
   return (
@@ -24,6 +26,10 @@ function App() {
           <Route
             path="/edit_task/:id"
             element={<ProtectedRoute component={EditTask} />}
+          />
+           <Route
+            path="/start_task/:id"
+            element={<ProtectedRoute component={StartTask} />}
           />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />

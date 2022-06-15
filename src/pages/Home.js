@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar";
 import NavBottom from "../components/NavBottom";
 import DeleteBtn from "../components/Deletebtn";
 import CreateTask from "./CreateTask";
+import StartTask from "./StartTask";
 
 import no_task from "../assets/img/no_task.png";
 import clock from "../assets/img/icons/clock.svg";
@@ -19,12 +20,14 @@ import api from "../apis/api";
 
 import "./home.css";
 
+
 function Home() {
   const { loggedInUser } = useContext(AuthContext);
 
   const [active, setActive] = useState(format(new Date(), "yyyy-MM-dd"));
   const [state, setState] = useState([]);
   const [showCreateTask, setShowCreateTask] = useState(false);
+  const [showStartTask, setShowStartTask] = useState(false);
 
   const navigate = useNavigate();
 
@@ -43,6 +46,9 @@ function Home() {
   function handleDayClick({ target }) {
     setActive(target.value);
     // fazer o api.get aqui
+  }
+  const handlestarttask = () =>{
+    setShowStartTask(true)
   }
 
   return (
@@ -76,7 +82,7 @@ function Home() {
                     {/* setar logica pra mudar de urgent pra not-urgent conforme a hora */}
                     <div className="task-top">
                       <h3>{name}</h3>
-                      <button className="start-btn">Start</button>
+                      <button className="start-btn" onClick={() =>navigate(`/start_task/${_id}`)}>Start</button>
                     </div>
                     <div className="steps">
                       <div className="icon-text-box">
@@ -129,6 +135,7 @@ function Home() {
       </div>
       {showCreateTask && <CreateTask />}
       {/* {showCreateTask ? <CreateTask /> : null} */}
+      {showStartTask && <StartTask />}
     </div>
   );
 }
