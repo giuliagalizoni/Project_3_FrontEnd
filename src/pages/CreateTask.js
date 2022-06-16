@@ -93,13 +93,14 @@ function CreateTask() {
       });
       console.log(response.data);
       navigate("/");
+      window.location.reload();
     } catch (err) {
       console.error(err);
     }
   }
 
   return (
-    <div className="container">
+    <div className="side">
       <BackBtn />
       <form className="form-task" onSubmit={handleSubmit}>
         <FormControl

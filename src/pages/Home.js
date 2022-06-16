@@ -5,6 +5,7 @@ import NavBottom from "../components/NavBottom";
 import DeleteBtn from "../components/Deletebtn";
 import CreateTask from "./CreateTask";
 import StartTask from "./StartTask";
+import SideDefault from "../components/SideDefault";
 
 import no_task from "../assets/img/no_task.png";
 import clock from "../assets/img/icons/clock.svg";
@@ -25,6 +26,7 @@ function Home() {
 
   const [active, setActive] = useState(format(new Date(), "yyyy-MM-dd"));
   const [state, setState] = useState([]);
+  const [showSideDefault, setShowSideDefault] = useState(true);
   const [showCreateTask, setShowCreateTask] = useState(false);
   const [showStartTask, setShowStartTask] = useState(false);
   const [taskId, setTaskId] = useState("");
@@ -45,19 +47,24 @@ function Home() {
 
   function handleDayClick({ target }) {
     setActive(target.value);
-    // fazer o api.get aqui
   }
 
   const handleStartClick = (id) => {
     setTaskId(...taskId, id);
     setShowStartTask(true);
+    setShowSideDefault(false);
+    setShowCreateTask(false);
   };
 
   return (
     // Div web-container criada apenas para organizar o layout responsivo
     <div className="web-container">
       <div className="container">
-        <Navbar setShowCreateTask={setShowCreateTask} />
+        <Navbar
+          setShowCreateTask={setShowCreateTask}
+          setShowSideDefault={setShowSideDefault}
+          setShowStartTask={setShowStartTask}
+        />
         <div className="header">
           <h1> Welcome, {loggedInUser.user.name}!</h1>
         </div>
@@ -150,9 +157,12 @@ function Home() {
         </div>
         <NavBottom />
       </div>
-      {showCreateTask && <CreateTask />}
-      {/* {showCreateTask ? <CreateTask /> : null} */}
-      {showStartTask && <StartTask id={taskId} />}
+      <div className="show-side">
+        {showSideDefault && <SideDefault />}
+        {showCreateTask && <CreateTask />}
+        {/* {showCreateTask && <CreateTask />} */}
+        {showStartTask && <StartTask id={taskId} />}
+      </div>
     </div>
   );
 }

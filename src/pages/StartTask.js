@@ -48,6 +48,7 @@ function StartTask(props) {
   const { _id, name, steps, date, starttime, endtime } = state;
 
   return (
+    // fazer isso sumir qunado a tela tá pequena
     <div className="side">
       <div>
         <header className="starttask-header">
