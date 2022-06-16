@@ -15,7 +15,7 @@ function FormControl(props) {
         value={props.value}
         onChange={props.onChange}
         min={props.min}
-        max={props.max}
+        maxLength={props.max}
         // placeholder={props.placeholder}
       />
     </div>
