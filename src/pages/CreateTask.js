@@ -44,8 +44,8 @@ function CreateTask() {
     field: "Work",
     date: format(new Date(), "yyyy-MM-dd"),
     weekday: "Mon",
-    starttime: "00:00",
-    endtime: "00:00",
+    starttime: "08:00",
+    endtime: "09:00",
     comments: "",
   });
 
@@ -111,7 +111,7 @@ function CreateTask() {
           onChange={handleChange}
           value={state.name}
           placeholder="Task Name"
-          max="200"
+          max="50"
         />
 
         {/* <FormControl
