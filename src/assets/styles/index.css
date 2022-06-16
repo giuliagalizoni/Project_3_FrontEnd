@@ -95,7 +95,15 @@ body {
 }
 
 .side {
-  display: none;
+  width: 400px;
+  height: 100%;
+  border-left: 1px solid #bdbdbd;
+  padding: 10px 20px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
 
 @media only screen and (min-width: 768px) {
@@ -109,7 +117,6 @@ body {
   .container {
     width: 768px;
     height: 876px;
-    padding-left: 80px;
   }
 }
 
@@ -123,6 +130,8 @@ body {
 
   .container {
     height: 716px;
+    width: 768px;
+    padding-left: 80px;
   }
 
   .nav {
@@ -152,19 +161,9 @@ body {
     flex-direction: column;
     justify-content: center;
   }
-
-  .side {
-    width: 400px;
-    border-left: 1px solid #bdbdbd;
-    padding: 10px 20px;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
 }
 
-@media only screen and (min-width: 1200px) {
+@media only screen and (min-width: 1400px) {
   body {
     background-image: url("../../assets/img/Background-web.png");
     background-repeat: no-repeat;
@@ -174,6 +173,7 @@ body {
 
   .container {
     height: 716px;
+    padding: 0;
   }
 
   .nav {

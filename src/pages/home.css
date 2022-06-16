@@ -1,4 +1,7 @@
 /* css dos cards */
+.show-side {
+  display: none;
+}
 
 .header {
   width: 379px;
@@ -57,8 +60,8 @@ h2 {
 
   background-color: #d7e0ff;
   border-radius: 2px;
-  width: 90%;
-  margin: 15px 0 0 0;
+  width: 92%;
+  margin: 15px 15px 0 0;
   padding: 10px;
 }
 
@@ -188,16 +191,22 @@ h2 {
 
 .notasks-msg {
   margin-top: 20px;
-  font-weight: 400;
+  font-weight: 700;
   font-size: 16px;
   line-height: 24px;
-
+  letter-spacing: 0.1px;
   text-align: center;
+  color: #5d83fd;
 }
 
 @media only screen and (min-width: 768px) {
   .taskcards-group {
     height: 600px;
+    min-width: 500px;
+  }
+
+  .tasks-container {
+    min-width: 600px;
   }
 }
 
@@ -205,6 +214,10 @@ h2 {
   .taskcards-group {
     height: 400px;
     margin-bottom: 0;
+  }
+
+  .show-side {
+    display: block;
   }
 
   .header {
