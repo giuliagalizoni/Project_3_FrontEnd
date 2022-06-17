@@ -57,16 +57,16 @@ function EditTask() {
       try {
         const response = await api.get(`/task/${id}`);
 
-        // let stepsArr = [];
-        // response.data.steps.map((step) =>
-        //   stepsArr.push({ label: step.description, value: step.description })
-        // );
+        let stepsArr = [];
+        response.data.steps.map((step) =>
+          stepsArr.push({ label: step.description, value: step.description })
+        );
 
-        // console.log(stepsArr);
-        // console.log(selectStep.value);
+        console.log(stepsArr);
+        console.log(selectStep.value);
 
-        // setSelectStep({ ...selectStep, value: [...stepsArr] });
-        // console.log(selectStep);
+        setSelectStep({ ...selectStep, value: [...stepsArr] });
+        console.log(selectStep);
 
         setState({ ...response.data });
       } catch (err) {
@@ -74,7 +74,7 @@ function EditTask() {
       }
     }
     fetchTask();
-  }, [id, selectStep]);
+  }, [id]);
 
   function handleInputChange(inputValue) {
     setSelectStep({ ...selectStep, inputValue });
