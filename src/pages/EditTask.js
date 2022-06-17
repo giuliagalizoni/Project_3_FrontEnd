@@ -242,7 +242,7 @@ function EditTask() {
           value={state.comments}
         />
         <button className="btn-lg" type="submit">
-          Create Task
+          Edit Task
         </button>
       </form>
     </div>

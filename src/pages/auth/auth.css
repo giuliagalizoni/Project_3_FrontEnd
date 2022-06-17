@@ -16,7 +16,8 @@ h1 {
 }
 
 .form {
-  height: 40%;
+  height: 400px;
+  margin-bottom: 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -66,7 +67,20 @@ input:valid + .auth-label {
   background: none;
 }
 
+.errors {
+  margin: 10px 0 0 5px;
+  max-width: 380px;
+
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 108.1%;
+  letter-spacing: 0.05em;
+
+  color: red;
+}
+
 .btn-container {
+  margin-top: 10px;
   height: 120px;
   display: flex;
   flex-direction: column;

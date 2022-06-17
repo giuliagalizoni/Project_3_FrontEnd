@@ -84,7 +84,7 @@ body {
 
 .container {
   font-family: "Inter", sans-serif;
-  height: 776px;
+  height: 90vh;
   width: 428px;
   padding: 0;
 
@@ -96,7 +96,7 @@ body {
 
 .side {
   width: 400px;
-  height: 100%;
+  height: 90vh;
   border-left: 1px solid #bdbdbd;
   padding: 10px 20px;
 
@@ -116,7 +116,7 @@ body {
 
   .container {
     width: 768px;
-    height: 876px;
+    /* height: 876px; */
   }
 }
 
@@ -129,7 +129,7 @@ body {
   }
 
   .container {
-    height: 716px;
+    /* height: 716px; */
     width: 768px;
     padding-left: 80px;
   }
@@ -172,7 +172,7 @@ body {
   }
 
   .container {
-    height: 716px;
+    /* height: 716px; */
     padding: 0;
   }
 
