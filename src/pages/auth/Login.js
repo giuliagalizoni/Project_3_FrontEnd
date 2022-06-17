@@ -48,7 +48,6 @@ function Login(props) {
     }
   }
 
-  // tentando fazer validação em tempo real
   function validateEmail() {
     if (!state.email.match(/[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/gm)) {
       setErrors({ ...errors, email: "Please type a valid email adress" });
@@ -94,7 +93,7 @@ function Login(props) {
         </p>
       </div>
 
-      <div className="container">
+      <div className="side">
         <div className="logo">
           <img src={logo} alt="logo" />
         </div>
@@ -115,9 +114,7 @@ function Login(props) {
             <label className="auth-label" htmlFor="signupFormEmail">
               Email{" "}
             </label>
-            {errors.email && (
-              <small style={{ color: "red" }}>{errors.email}</small>
-            )}
+            {errors.email && <small className="errors">{errors.email}</small>}
           </div>
 
           <div className="input-auth-group">
@@ -137,7 +134,7 @@ function Login(props) {
               Password
             </label>
             {errors.password && (
-              <small style={{ color: "red" }}>{errors.password}</small>
+              <small className="errors">{errors.password}</small>
             )}
           </div>
 

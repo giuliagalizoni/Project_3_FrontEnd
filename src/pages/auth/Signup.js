@@ -40,6 +40,40 @@ function Signup(props) {
     }
   }
 
+  function validateEmail() {
+    if (!state.email.match(/[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/gm)) {
+      setErrors({ ...errors, email: "Please type a valid email adress" });
+    } else {
+      setErrors({ ...errors, email: null });
+    }
+  }
+
+  function validatePassword() {
+    if (
+      !state.password.match(
+        /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/gm
+      )
+    ) {
+      setErrors({
+        ...errors,
+        password:
+          "Your password must have at least 8 characters including one number and one special character",
+      });
+    } else {
+      setErrors({ ...errors, password: null });
+    }
+  }
+
+  function handleBlur(event) {
+    if (event.target.name === "email") {
+      validateEmail();
+    }
+
+    if (event.target.name === "password") {
+      validatePassword();
+    }
+  }
+
   return (
     <div className="web-container">
       <div className="carousel">
@@ -51,49 +85,65 @@ function Signup(props) {
         </p>
       </div>
 
-      <div className="container">
+      <div className="side">
         <h1>Signup</h1>
         <form className="form" onSubmit={handleSubmit}>
-          <div>
-            {/* <label htmlFor="signupFormName">Name</label> */}
+          <div className="input-auth-group">
             <input
               className="input-auth"
-              placeholder="Name"
+              // placeholder="Name"
               type="text"
               name="name"
               id="signupFormName"
               value={state.name}
               error={errors.name}
               onChange={handleChange}
+              onBlur={handleBlur}
+              required
             />
+            <label className="auth-label" htmlFor="signupFormName">
+              Name
+            </label>
           </div>
 
-          <div>
-            {/* <label htmlFor="signupFormEmail">E-mail Address</label> */}
+          <div className="input-auth-group">
             <input
               className="input-auth"
-              placeholder="Email"
+              // placeholder="Email"
               type="email"
               name="email"
               id="signupFormEmail"
               value={state.email}
               error={errors.email}
               onChange={handleChange}
+              onBlur={handleBlur}
+              required
             />
+            <label className="auth-label" htmlFor="signupFormEmail">
+              Email
+            </label>
+            {errors.email && <small className="errors">{errors.email}</small>}
           </div>
 
-          <div>
-            {/* <label htmlFor="signupFormPassword">Password</label> */}
+          <div className="input-auth-group">
             <input
               className="input-auth"
-              placeholder="Password"
+              // placeholder="Password"
               type="password"
               name="password"
               id="signupFormPassword"
               value={state.password}
               error={errors.password}
               onChange={handleChange}
+              onBlur={handleBlur}
+              required
             />
+            <label className="auth-label" htmlFor="signupFormPassword">
+              Password
+            </label>
+            {errors.password && (
+              <small className="errors">{errors.password}</small>
+            )}
           </div>
 
           <div className="btn-container">
