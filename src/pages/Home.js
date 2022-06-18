@@ -30,31 +30,55 @@ function Home() {
   const [showCreateTask, setShowCreateTask] = useState(false);
   const [showStartTask, setShowStartTask] = useState(false);
   const [taskId, setTaskId] = useState("");
+  const [currentActiveTask, setcurrentActiveTask] = useState("");
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await api.get(`/tasks/${active}`, {});
-        setState([...response.data]);
-      } catch (err) {
-        console.error(err);
-      }
-    }
     fetchData();
   }, [active]);
+
+  async function fetchData() {
+    try {
+      const response = await api.get(`/tasks/${active}`, {});
+      setState([...response.data]);
+    } catch (err) {
+      console.error(err);
+    }
+  }
 
   function handleDayClick({ target }) {
     setActive(target.value);
   }
 
+  async function handleEndClick() {
+    try {
+      console.log("chegou api patch");
+      await api.patch(`/task/endtask/${taskId}`, {
+        done: true,
+      });
+
+      fetchData();
+      setShowStartTask(false);
+      setShowSideDefault(true);
+      console.log("chegou aqui");
+    } catch (err) {
+      console.error(err);
+    }
+  }
   const handleStartClick = (id) => {
-    setTaskId(...taskId, id);
+    setTaskId(id);
     setShowStartTask(true);
     setShowSideDefault(false);
     setShowCreateTask(false);
   };
+
+  useEffect(() => {
+    const filtered = state.filter((task) => task.done === false);
+    if (filtered.length) {
+      setcurrentActiveTask(filtered[0]._id);
+    }
+  }, [state]);
 
   return (
     // Div web-container criada apenas para organizar o layout responsivo
@@ -85,13 +109,14 @@ function Home() {
           ) : (
             <div className="taskcards-group">
               {state.map((task) => {
-                const { _id, name, steps, date, starttime, endtime } = task;
+                const { _id, name, steps, date, startdate, enddate } = task;
                 return (
                   <div key={_id} className="task-card urgent">
                     {/* setar logica pra mudar de urgent pra not-urgent conforme a hora */}
                     <div className="task-top">
                       <h3>{name}</h3>
                       <button
+                        disabled={_id !== currentActiveTask}
                         className="start-btn start-web"
                         onClick={() => {
                           handleStartClick(_id);
@@ -100,12 +125,12 @@ function Home() {
                         Start
                       </button>
 
-                      <button
+                      {/* <button
                         className="start-btn start-mobile"
                         onClick={() => navigate(`/start_task/${_id}`)}
                       >
                         Start
-                      </button>
+                      </button> */}
                       {/* () =>navigate(`/start_task/${_id}`) */}
                     </div>
                     <div className="steps">
@@ -133,10 +158,10 @@ function Home() {
                       <div className="icon-text-box">
                         <img src={clock} alt="Clock icon" />
                         <p className="date-time">
-                          {starttime} - {endtime}
+                          {format(new Date(startdate), "HH:mm")} - {format(new Date(enddate), "HH:mm")}
                         </p>
                         <img src={calendar} alt="Calendar icon" />
-                        <p className="date-time">{date}</p>
+                        <p className="date-time">{format(new Date(startdate), "dd/MM/yyyy")}</p>
                       </div>
                       {/* trocar por icons */}
                       <div className="icon-btns">
@@ -161,7 +186,7 @@ function Home() {
         {showSideDefault && <SideDefault />}
         {showCreateTask && <CreateTask />}
         {/* {showCreateTask && <CreateTask />} */}
-        {showStartTask && <StartTask id={taskId} />}
+        {showStartTask && <StartTask id={taskId} onEnd={handleEndClick} />}
       </div>
     </div>
   );

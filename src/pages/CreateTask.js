@@ -2,6 +2,7 @@ import React from "react";
 
 import CreatableSelect from "react-select/creatable";
 import { format } from "date-fns";
+import { zonedTimeToUtc } from "date-fns-tz";
 
 import "./taskForms.css";
 
@@ -42,7 +43,13 @@ function CreateTask() {
     name: "",
     steps: [],
     field: "Work",
-    date: format(new Date(), "yyyy-MM-dd"),
+    date: format(
+      zonedTimeToUtc(
+        new Date(),
+        Intl.DateTimeFormat().resolvedOptions().timeZone
+      ),
+      "yyyy-MM-dd"
+    ),
     weekday: "Mon",
     starttime: "08:00",
     endtime: "09:00",
