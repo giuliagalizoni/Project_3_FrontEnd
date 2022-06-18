@@ -37,13 +37,7 @@ function StartTask(props) {
     fetchData();
   }, [props.id]);
 
-  // useEffect(() => {
-  //   const dateObj = new Date(state.date);
-  //   if (new Date(state.date) === new Date()) {
-  //     setWeekday("Today");
-  //   }
-  //   setWeekday(format(dateObj, "EEEE"));
-  // }, [state]);
+  
 
   const { _id, name, steps, date, starttime, endtime } = state;
 
@@ -82,7 +76,7 @@ function StartTask(props) {
           </ul>
         </div>
       </div>
-      <button className="btn-lg" type="submit">
+      <button className="btn-lg" onClick={props.onEnd}>
         End Task
       </button>
     </div>

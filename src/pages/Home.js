@@ -30,31 +30,58 @@ function Home() {
   const [showCreateTask, setShowCreateTask] = useState(false);
   const [showStartTask, setShowStartTask] = useState(false);
   const [taskId, setTaskId] = useState("");
+  const [currentActiveTask, setcurrentActiveTask] = useState("");
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await api.get(`/tasks/${active}`, {});
-        setState([...response.data]);
-      } catch (err) {
-        console.error(err);
-      }
-    }
     fetchData();
-  }, [active]);
+  }, []);
+
+  async function fetchData() {
+    try {
+      console.log("chegou fetchdata")
+      const response = await api.get(`/tasks/${active}`, {});
+      setState([...response.data]);
+      setShowStartTask(false);
+      setShowSideDefault(true);
+      console.log("chegou aqui tb")
+    } catch (err) {
+      console.error(err);
+    }
+  }
 
   function handleDayClick({ target }) {
     setActive(target.value);
   }
-
+  async function handleEndClick(id) {
+    try {
+      console.log("chegou api patch")
+      await api.patch(`/task/endtask/${id}`, {
+        done: true,
+      });
+      fetchData();
+      console.log("chegou aqui")
+    } catch (err) {
+      console.error(err);
+    }
+  }
   const handleStartClick = (id) => {
     setTaskId(...taskId, id);
     setShowStartTask(true);
     setShowSideDefault(false);
     setShowCreateTask(false);
   };
+
+  useEffect(() => {
+    const filtered = state.filter((task) => task.done === false);
+    if (filtered.length) {
+      setcurrentActiveTask(filtered[0]._id);
+    }
+  }, [state]);
+
+  console.log(showStartTask);
+  console.log(showSideDefault);
 
   return (
     // Div web-container criada apenas para organizar o layout responsivo
@@ -92,6 +119,7 @@ function Home() {
                     <div className="task-top">
                       <h3>{name}</h3>
                       <button
+                        disabled={_id !== currentActiveTask}
                         className="start-btn start-web"
                         onClick={() => {
                           handleStartClick(_id);
@@ -100,12 +128,12 @@ function Home() {
                         Start
                       </button>
 
-                      <button
+                      {/* <button
                         className="start-btn start-mobile"
                         onClick={() => navigate(`/start_task/${_id}`)}
                       >
                         Start
-                      </button>
+                      </button> */}
                       {/* () =>navigate(`/start_task/${_id}`) */}
                     </div>
                     <div className="steps">
@@ -161,7 +189,9 @@ function Home() {
         {showSideDefault && <SideDefault />}
         {showCreateTask && <CreateTask />}
         {/* {showCreateTask && <CreateTask />} */}
-        {showStartTask && <StartTask id={taskId} />}
+        {showStartTask && (
+          <StartTask id={taskId} onEnd={() => handleEndClick(taskId)} />
+        )}
       </div>
     </div>
   );
