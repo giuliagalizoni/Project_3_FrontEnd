@@ -36,16 +36,12 @@ function Home() {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [active]);
 
   async function fetchData() {
     try {
-      console.log("chegou fetchdata")
       const response = await api.get(`/tasks/${active}`, {});
       setState([...response.data]);
-      setShowStartTask(false);
-      setShowSideDefault(true);
-      console.log("chegou aqui tb")
     } catch (err) {
       console.error(err);
     }
@@ -54,20 +50,24 @@ function Home() {
   function handleDayClick({ target }) {
     setActive(target.value);
   }
-  async function handleEndClick(id) {
+
+  async function handleEndClick() {
     try {
-      console.log("chegou api patch")
-      await api.patch(`/task/endtask/${id}`, {
+      console.log("chegou api patch");
+      await api.patch(`/task/endtask/${taskId}`, {
         done: true,
       });
+
       fetchData();
-      console.log("chegou aqui")
+      setShowStartTask(false);
+      setShowSideDefault(true);
+      console.log("chegou aqui");
     } catch (err) {
       console.error(err);
     }
   }
   const handleStartClick = (id) => {
-    setTaskId(...taskId, id);
+    setTaskId(id);
     setShowStartTask(true);
     setShowSideDefault(false);
     setShowCreateTask(false);
@@ -79,9 +79,6 @@ function Home() {
       setcurrentActiveTask(filtered[0]._id);
     }
   }, [state]);
-
-  console.log(showStartTask);
-  console.log(showSideDefault);
 
   return (
     // Div web-container criada apenas para organizar o layout responsivo
@@ -112,7 +109,7 @@ function Home() {
           ) : (
             <div className="taskcards-group">
               {state.map((task) => {
-                const { _id, name, steps, date, starttime, endtime } = task;
+                const { _id, name, steps, date, startdate, enddate } = task;
                 return (
                   <div key={_id} className="task-card urgent">
                     {/* setar logica pra mudar de urgent pra not-urgent conforme a hora */}
@@ -161,10 +158,10 @@ function Home() {
                       <div className="icon-text-box">
                         <img src={clock} alt="Clock icon" />
                         <p className="date-time">
-                          {starttime} - {endtime}
+                          {format(new Date(startdate), "HH:mm")} - {format(new Date(enddate), "HH:mm")}
                         </p>
                         <img src={calendar} alt="Calendar icon" />
-                        <p className="date-time">{date}</p>
+                        <p className="date-time">{format(new Date(startdate), "dd/MM/yyyy")}</p>
                       </div>
                       {/* trocar por icons */}
                       <div className="icon-btns">
@@ -189,9 +186,7 @@ function Home() {
         {showSideDefault && <SideDefault />}
         {showCreateTask && <CreateTask />}
         {/* {showCreateTask && <CreateTask />} */}
-        {showStartTask && (
-          <StartTask id={taskId} onEnd={() => handleEndClick(taskId)} />
-        )}
+        {showStartTask && <StartTask id={taskId} onEnd={handleEndClick} />}
       </div>
     </div>
   );
