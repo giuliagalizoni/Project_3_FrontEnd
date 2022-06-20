@@ -29,6 +29,10 @@
 }
 
 .creatable-div {
+  overflow-y: auto;
+  max-width: 380px;
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 100px;
 }
