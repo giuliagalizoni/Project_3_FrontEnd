@@ -1,7 +1,8 @@
 import { Route, Routes } from "react-router-dom";
 import { AuthContextComponent } from "../contexts/authContext";
-// import "bootstrap/dist/css/bootstrap.min.css";
+
 import "../assets/styles/index.css";
+// import "bootstrap/dist/css/bootstrap.min.css";
 
 import Home from "../pages/Home";
 import Signup from "../pages/auth/Signup";
@@ -11,7 +12,6 @@ import CreateTask from "../pages/CreateTask";
 import EditTask from "../pages/EditTask";
 import Error from "../pages/Error";
 import StartTask from "../pages/StartTask";
-
 
 function App() {
   return (
@@ -27,7 +27,7 @@ function App() {
             path="/edit_task/:id"
             element={<ProtectedRoute component={EditTask} />}
           />
-           <Route
+          <Route
             path="/start_task/:id"
             element={<ProtectedRoute component={StartTask} />}
           />

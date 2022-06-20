@@ -4,7 +4,7 @@ import logo2 from "../assets/img/logo-2.svg";
 function Error() {
   return (
     <div className="web-container">
-      <div className="container">
+      <div className="container-default">
         <Link to={"/"}>
           <img src={logo2} alt="Organize.me" style={{ width: "180px" }} />
         </Link>
