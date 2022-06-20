@@ -39,6 +39,8 @@ function StartTask(props) {
 
   const { _id, name, steps, startdate, enddate } = state;
   // console.log(format(new Date(startdate), "HH:mm"));
+
+  console.log(props.id);
   return (
     <div className="side">
       <div>

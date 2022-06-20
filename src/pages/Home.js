@@ -1,4 +1,5 @@
 import React from "react";
+
 import Calendar from "../components/Calendar";
 import Navbar from "../components/Navbar";
 import NavBottom from "../components/NavBottom";
@@ -7,7 +8,6 @@ import CreateTask from "./CreateTask";
 import StartTask from "./StartTask";
 import SideDefault from "../components/SideDefault";
 import EditTask from "./EditTask";
-import ModalStartTask from "./ModalStartTask";
 
 import no_task from "../assets/img/no_task.png";
 import clock from "../assets/img/icons/clock.svg";
@@ -19,6 +19,7 @@ import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/authContext";
 import { format } from "date-fns";
+import { Modal } from "react-bootstrap";
 import api from "../apis/api";
 
 import "./home.css";
@@ -32,6 +33,9 @@ function Home() {
   const [showCreateTask, setShowCreateTask] = useState(false);
   const [showStartTask, setShowStartTask] = useState(false);
   const [showEditTask, setShowEditTask] = useState(false);
+  // Modal states
+  const [fullscreen, setFullscreen] = useState(true);
+  const [showModal, setShowModal] = useState(false);
   const [taskId, setTaskId] = useState("");
   const [currentActiveTask, setcurrentActiveTask] = useState("");
 
@@ -56,7 +60,6 @@ function Home() {
 
   async function handleEndClick() {
     try {
-      // console.log("chegou api patch");
       await api.patch(`/task/endtask/${taskId}`, {
         done: true,
       });
@@ -64,7 +67,7 @@ function Home() {
       fetchData();
       setShowStartTask(false);
       setShowSideDefault(true);
-      // console.log("chegou aqui");
+      setShowModal(false);
     } catch (err) {
       console.error(err);
     }
@@ -91,10 +94,16 @@ function Home() {
     }
   }, [state]);
 
+  function handleShowModal(id) {
+    setTaskId(id);
+    setFullscreen(true);
+    setShowModal(true);
+  }
+
   return (
-    // Div web-container criada apenas para organizar o layout responsivo
+    // Div web--default criada apenas para organizar o layout responsivo
     <div className="web-container">
-      <div className="container">
+      <div className="container-default">
         <Navbar
           setShowCreateTask={setShowCreateTask}
           setShowSideDefault={setShowSideDefault}
@@ -120,26 +129,36 @@ function Home() {
           ) : (
             <div className="taskcards-group">
               {state.map((task) => {
-                const { _id, name, steps, date, startdate, enddate } = task;
+                const { _id, name, steps, date, startdate, enddate, done } =
+                  task;
                 return (
                   <div key={_id} className="task-card urgent">
                     {/* setar logica pra mudar de urgent pra not-urgent conforme a hora */}
                     <div className="task-top">
                       <h3>{name}</h3>
-                      <button
-                        disabled={_id !== currentActiveTask}
-                        className="start-btn start-web"
-                        onClick={() => {
-                          handleStartClick(_id);
-                        }}
-                      >
-                        Start
-                      </button>
+                      {!done ? (
+                        <>
+                          <button
+                            disabled={_id !== currentActiveTask}
+                            className="start-btn start-web"
+                            onClick={() => {
+                              handleStartClick(_id);
+                            }}
+                          >
+                            Start
+                          </button>
 
-                      <div className="start-mobile">
-                        <ModalStartTask id={_id} />
-                      </div>
-                      {/* () =>navigate(`/start_task/${_id}`) */}
+                          <button
+                            disabled={_id !== currentActiveTask}
+                            className="start-btn start-mobile"
+                            onClick={() => handleShowModal(_id)}
+                          >
+                            Start
+                          </button>
+                        </>
+                      ) : (
+                        <p>DONE!</p>
+                      )}
                     </div>
                     <div className="steps">
                       <div className="icon-text-box">
@@ -201,6 +220,7 @@ function Home() {
         </div>
         <NavBottom />
       </div>
+
       <div className="show-side">
         {showSideDefault && <SideDefault />}
         {showCreateTask && <CreateTask />}
@@ -208,6 +228,14 @@ function Home() {
         {showStartTask && <StartTask id={taskId} onEnd={handleEndClick} />}
         {showEditTask && <EditTask id={taskId} />}
       </div>
+
+      <Modal
+        show={showModal}
+        fullscreen={fullscreen.toString()}
+        onHide={() => setShowModal(false)}
+      >
+        <StartTask id={taskId} onEnd={handleEndClick} />
+      </Modal>
     </div>
   );
 }
