@@ -35,7 +35,7 @@ const createOption = (label) => ({
   value: label,
 });
 
-function EditTask() {
+function EditTask(props) {
   const [state, setState] = useState({
     name: "",
     steps: [],
@@ -55,7 +55,7 @@ function EditTask() {
   useEffect(() => {
     async function fetchTask() {
       try {
-        const response = await api.get(`/task/${id}`);
+        const response = await api.get(`/task/${props.id ? props.id : id}`);
 
         let stepsArr = [];
         response.data.steps.map((step) =>
@@ -127,7 +127,7 @@ function EditTask() {
   }
 
   return (
-    <div className="container">
+    <div className="side">
       <BackBtn />
       <form className="form-task" onSubmit={handleSubmit}>
         <FormControl

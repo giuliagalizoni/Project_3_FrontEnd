@@ -1,7 +1,7 @@
 import React from "react";
 
 import CreatableSelect from "react-select/creatable";
-import { format } from "date-fns";
+import { format, formatRelative } from "date-fns";
 import { zonedTimeToUtc } from "date-fns-tz";
 
 import "./taskForms.css";
@@ -23,15 +23,15 @@ const field = [
   { value: "Education", label: "Education" },
 ];
 
-const weekDay = [
-  { value: "Sun", label: "Sun" },
-  { value: "Mon", label: "Mon" },
-  { value: "Tue", label: "Tue" },
-  { value: "Wed", label: "Wed" },
-  { value: "Thu", label: "Thu" },
-  { value: "Fri", label: "Fri" },
-  { value: "Sat", label: "Sat" },
-];
+// const weekDay = [
+//   { value: "Sun", label: "Sun" },
+//   { value: "Mon", label: "Mon" },
+//   { value: "Tue", label: "Tue" },
+//   { value: "Wed", label: "Wed" },
+//   { value: "Thu", label: "Thu" },
+//   { value: "Fri", label: "Fri" },
+//   { value: "Sat", label: "Sat" },
+// ];
 
 const createOption = (label) => ({
   label,
@@ -50,7 +50,7 @@ function CreateTask() {
       ),
       "yyyy-MM-dd"
     ),
-    weekday: "Mon",
+    // weekday: "Mon",
     starttime: "08:00",
     endtime: "09:00",
     comments: "",
@@ -142,9 +142,10 @@ function CreateTask() {
             onChange={handleChange}
             onInputChange={handleInputChange}
             onKeyDown={handleKeyDown}
-            placeholder="Type something and press enter..."
+            placeholder="Type your step and press enter..."
             value={selectStep.value}
             id="selectCreatable"
+            // width="20px"
           />
         </div>
 
@@ -174,7 +175,9 @@ function CreateTask() {
           onChange={handleChange}
           value={state.date}
         />
-        <SelectControl
+
+        <p>{format(new Date(state.date), "cccc")}</p>
+        {/* <SelectControl
           label="Week Days"
           labelclass="label"
           id="weekday"
@@ -190,7 +193,7 @@ function CreateTask() {
               {currentOptionObj.label}
             </option>
           ))}
-        </SelectControl>
+        </SelectControl> */}
 
         <div className="time-container">
           <FormControl

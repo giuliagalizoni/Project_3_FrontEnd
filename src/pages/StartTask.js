@@ -23,12 +23,12 @@ function StartTask(props) {
 
   // const [weekday, setWeekday] = useState();
 
-  const { id } = useParams();
+  // const { id } = useParams();
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await api.get(`/task/${props.id ? props.id : id}`, {});
+        const response = await api.get(`/task/${props.id}`, {});
         setState({ ...response.data });
       } catch (err) {
         console.error(err);
@@ -37,11 +37,9 @@ function StartTask(props) {
     fetchData();
   }, [props.id]);
 
-  const { _id, name, steps, startdate, enddate, date, starttime, endtime } =
-    state;
-    console.log(enddate, "HH,mm")
+  const { _id, name, steps, startdate, enddate } = state;
+  // console.log(format(new Date(startdate), "HH:mm"));
   return (
-    // fazer isso sumir qunado a tela tá pequena
     <div className="side">
       <div>
         <header className="starttask-header">
@@ -53,10 +51,13 @@ function StartTask(props) {
             <img src={check} alt="Check icon" />
             <h1>Task list</h1>
           </div>
-          <div className="date-box">
-            <p className="">{format(new Date(startdate), 'dd/MM/yyyy')},</p>
-            <p className="">{format(new Date(startdate), 'HH:mm')} - {format(new Date(enddate), 'HH:mm')}</p>
-          </div>
+          {/* <div className="date-box">
+            <p className="">{format(new Date(startdate), "dd/MM/yyyy")},</p>
+            <p className="">
+              {format(new Date(startdate), "HH:mm")} -{" "}
+              {format(new Date(enddate), "HH:mm")}
+            </p>
+          </div> */}
           <p className="steps-text">Check your steps, once is done</p>
         </div>
         <div className="steps">

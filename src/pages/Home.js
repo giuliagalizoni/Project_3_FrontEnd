@@ -6,6 +6,8 @@ import DeleteBtn from "../components/Deletebtn";
 import CreateTask from "./CreateTask";
 import StartTask from "./StartTask";
 import SideDefault from "../components/SideDefault";
+import EditTask from "./EditTask";
+import ModalStartTask from "./ModalStartTask";
 
 import no_task from "../assets/img/no_task.png";
 import clock from "../assets/img/icons/clock.svg";
@@ -29,6 +31,7 @@ function Home() {
   const [showSideDefault, setShowSideDefault] = useState(true);
   const [showCreateTask, setShowCreateTask] = useState(false);
   const [showStartTask, setShowStartTask] = useState(false);
+  const [showEditTask, setShowEditTask] = useState(false);
   const [taskId, setTaskId] = useState("");
   const [currentActiveTask, setcurrentActiveTask] = useState("");
 
@@ -53,7 +56,7 @@ function Home() {
 
   async function handleEndClick() {
     try {
-      console.log("chegou api patch");
+      // console.log("chegou api patch");
       await api.patch(`/task/endtask/${taskId}`, {
         done: true,
       });
@@ -61,7 +64,7 @@ function Home() {
       fetchData();
       setShowStartTask(false);
       setShowSideDefault(true);
-      console.log("chegou aqui");
+      // console.log("chegou aqui");
     } catch (err) {
       console.error(err);
     }
@@ -69,6 +72,14 @@ function Home() {
   const handleStartClick = (id) => {
     setTaskId(id);
     setShowStartTask(true);
+    setShowSideDefault(false);
+    setShowCreateTask(false);
+  };
+
+  const handleEditClick = (id) => {
+    setTaskId(id);
+    setShowEditTask(true);
+    setShowStartTask(false);
     setShowSideDefault(false);
     setShowCreateTask(false);
   };
@@ -125,12 +136,9 @@ function Home() {
                         Start
                       </button>
 
-                      {/* <button
-                        className="start-btn start-mobile"
-                        onClick={() => navigate(`/start_task/${_id}`)}
-                      >
-                        Start
-                      </button> */}
+                      <div className="start-mobile">
+                        <ModalStartTask id={_id} />
+                      </div>
                       {/* () =>navigate(`/start_task/${_id}`) */}
                     </div>
                     <div className="steps">
@@ -158,16 +166,27 @@ function Home() {
                       <div className="icon-text-box">
                         <img src={clock} alt="Clock icon" />
                         <p className="date-time">
-                          {format(new Date(startdate), "HH:mm")} - {format(new Date(enddate), "HH:mm")}
+                          {format(new Date(startdate), "HH:mm")} -{" "}
+                          {format(new Date(enddate), "HH:mm")}
                         </p>
                         <img src={calendar} alt="Calendar icon" />
-                        <p className="date-time">{format(new Date(startdate), "dd/MM/yyyy")}</p>
+                        <p className="date-time">
+                          {format(new Date(startdate), "dd/MM/yyyy")}
+                        </p>
                       </div>
                       {/* trocar por icons */}
                       <div className="icon-btns">
                         <button
-                          className="icon-btn"
+                          className="icon-btn start-mobile"
                           onClick={() => navigate(`/edit_task/${_id}`)}
+                        >
+                          <img src={editbutton} alt="Edit task" />
+                        </button>
+                        <button
+                          className="icon-btn start-web"
+                          onClick={() => {
+                            handleEditClick(_id);
+                          }}
                         >
                           <img src={editbutton} alt="Edit task" />
                         </button>
@@ -187,6 +206,7 @@ function Home() {
         {showCreateTask && <CreateTask />}
         {/* {showCreateTask && <CreateTask />} */}
         {showStartTask && <StartTask id={taskId} onEnd={handleEndClick} />}
+        {showEditTask && <EditTask id={taskId} />}
       </div>
     </div>
   );
