@@ -22,6 +22,11 @@ import { format } from "date-fns";
 import { Modal } from "react-bootstrap";
 import api from "../apis/api";
 
+// import "../assets/styles/bootstrap/css/bootstrap-theme.css";
+// import "../assets/styles/bootstrap/css/bootstrap-theme.min.css";
+// import "../assets/styles/bootstrap/css/bootstrap.css";
+// import "../assets/styles/bootstrap/css/bootstrap.min.css";
+
 import "./home.css";
 
 function Home() {
@@ -56,6 +61,7 @@ function Home() {
 
   function handleDayClick({ target }) {
     setActive(target.value);
+    console.log(active);
   }
 
   async function handleEndClick() {
@@ -121,8 +127,12 @@ function Home() {
           <h2>Tasks</h2>
           {!state.length ? (
             <div className="taskcards-group">
-              <img className="notasks-img" src={no_task} alt="sem task" />
-              <p className="notasks-msg">
+              <img
+                className="notasks-img hide-web"
+                src={no_task}
+                alt="sem task"
+              />
+              <p className="notasks-msg hide-web">
                 Press “ + “ in the menu and create your tasks
               </p>
             </div>
@@ -150,7 +160,7 @@ function Home() {
 
                           <button
                             disabled={_id !== currentActiveTask}
-                            className="start-btn start-mobile"
+                            className="start-btn hide-web"
                             onClick={() => handleShowModal(_id)}
                           >
                             Start
@@ -196,7 +206,7 @@ function Home() {
                       {/* trocar por icons */}
                       <div className="icon-btns">
                         <button
-                          className="icon-btn start-mobile"
+                          className="icon-btn hide-web"
                           onClick={() => navigate(`/edit_task/${_id}`)}
                         >
                           <img src={editbutton} alt="Edit task" />

@@ -15,13 +15,10 @@ function StartTask(props) {
     steps: [],
     field: "",
     date: "",
-    weekday: "",
     starttime: "",
     endtime: "",
     comments: "",
   });
-
-  // const [weekday, setWeekday] = useState();
 
   // const { id } = useParams();
 
@@ -40,7 +37,7 @@ function StartTask(props) {
   const { _id, name, steps, startdate, enddate } = state;
   // console.log(format(new Date(startdate), "HH:mm"));
 
-  console.log(props.id);
+  console.log(state.steps);
   return (
     <div className="side">
       <div>
@@ -67,7 +64,12 @@ function StartTask(props) {
           <ul className="start-steps-list">
             {steps.map((step) => (
               <li key={step._id} className="step-checkbox-item">
-                <input type="checkbox" id={step._id} className="checkbox" />
+                <input
+                  type="checkbox"
+                  id={step._id}
+                  className="checkbox"
+                  onClick={() => console.log("clicou", step.description)}
+                />
                 <label className="step-label" htmlFor={step._id}>
                   {step.description}
                 </label>
