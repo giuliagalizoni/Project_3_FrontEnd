@@ -1,26 +1,24 @@
-import api from "../apis/api";
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { format } from "date-fns";
+import api from '../apis/api';
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { format } from 'date-fns';
 
-import "./startTask.css";
+import './startTask.css';
 
-import BackBtn from "../components/BackBtn";
-
-import check from "../assets/img/icons/check.svg";
+import check from '../assets/img/icons/check.svg';
 
 function StartTask(props) {
   const [state, setState] = useState({
-    name: "",
+    name: '',
     steps: [],
-    field: "",
-    date: "",
-    starttime: "",
-    endtime: "",
-    comments: "",
+    field: '',
+    // date: '',
+    // starttime: '',
+    // endtime: '',
+    startdate: '',
+    enddate: '',
+    comments: '',
   });
-
-  // const { id } = useParams();
 
   useEffect(() => {
     async function fetchData() {
@@ -35,42 +33,41 @@ function StartTask(props) {
   }, [props.id]);
 
   const { _id, name, steps, startdate, enddate } = state;
-  // console.log(format(new Date(startdate), "HH:mm"));
 
-  console.log(state.steps);
+  // console.log(state);
+
   return (
-    <div className="side">
+    <div className='side'>
       <div>
-        <header className="starttask-header">
-          <BackBtn />
+        <header className='starttask-header'>
           <h3>{name}</h3>
         </header>
-        <div className="starttask-top">
-          <div className="title">
-            <img src={check} alt="Check icon" />
+        <div className='starttask-top'>
+          <div className='title'>
+            <img src={check} alt='Check icon' />
             <h1>Task list</h1>
           </div>
-          {/* <div className="date-box">
-            <p className="">{format(new Date(startdate), "dd/MM/yyyy")},</p>
-            <p className="">
-              {format(new Date(startdate), "HH:mm")} -{" "}
-              {format(new Date(enddate), "HH:mm")}
+          {/* <div className='date-box'>
+            <p className=''>{format(new Date(startdate), 'dd/MM/yyyy')},</p>
+            <p className=''>
+              {format(new Date(startdate), 'HH:mm')} -{' '}
+              {format(new Date(enddate), 'HH:mm')}
             </p>
           </div> */}
-          <p className="steps-text">Check your steps, once is done</p>
+          <p className='steps-text'>Checkmark the steps once you do it.</p>
         </div>
-        <div className="steps">
-          <div className="icon-text-box"></div>
-          <ul className="start-steps-list">
+        <div className='steps'>
+          <div className='icon-text-box'></div>
+          <ul className='start-steps-list'>
             {steps.map((step) => (
-              <li key={step._id} className="step-checkbox-item">
+              <li key={step._id} className='step-checkbox-item'>
                 <input
-                  type="checkbox"
+                  type='checkbox'
                   id={step._id}
-                  className="checkbox"
-                  onClick={() => console.log("clicou", step.description)}
+                  className='checkbox'
+                  onClick={() => console.log('clicou', step.description)}
                 />
-                <label className="step-label" htmlFor={step._id}>
+                <label className='step-label' htmlFor={step._id}>
                   {step.description}
                 </label>
               </li>
@@ -78,7 +75,7 @@ function StartTask(props) {
           </ul>
         </div>
       </div>
-      <button className="btn-lg" onClick={props.onEnd}>
+      <button className='btn-lg' onClick={props.onEnd}>
         End Task
       </button>
     </div>

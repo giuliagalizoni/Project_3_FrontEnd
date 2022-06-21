@@ -73,6 +73,10 @@ h2 {
   border-left: 5px solid #fba132;
 }
 
+.done {
+  border-left: 5px solid #76c79e;
+}
+
 .task-top {
   display: flex;
   justify-content: space-between;
@@ -138,7 +142,7 @@ h2 {
   font-size: 12px;
   line-height: 20px;
   letter-spacing: 0.01em;
-  font-feature-settings: "pnum" on, "lnum" on;
+  font-feature-settings: 'pnum' on, 'lnum' on;
   color: #4a4a4a;
 }
 
@@ -217,7 +221,12 @@ h2 {
 @media only screen and (min-width: 992px) {
   .taskcards-group {
     height: 400px;
+    min-width: 400px;
     margin-bottom: 0;
+  }
+
+  .tasks-container {
+    min-width: 400px;
   }
 
   .show-side {
@@ -234,5 +243,17 @@ h2 {
 
   .hide-web {
     display: none;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .taskcards-group {
+    height: 460px;
+  }
+}
+
+@media only screen and (min-width: 1400px) {
+  .taskcards-group {
+    height: 400px;
   }
 }

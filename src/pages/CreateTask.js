@@ -1,26 +1,26 @@
-import React from "react";
+import React from 'react';
 
-import CreatableSelect from "react-select/creatable";
-import { format, formatRelative } from "date-fns";
-import { zonedTimeToUtc } from "date-fns-tz";
+import CreatableSelect from 'react-select/creatable';
+import { format, formatRelative } from 'date-fns';
+import { zonedTimeToUtc } from 'date-fns-tz';
 
-import "./taskForms.css";
+import './taskForms.css';
 
-import { useNavigate } from "react-router-dom";
-import api from "../apis/api";
-import { useState } from "react";
-import FormControl from "../components/control/FormControl";
-import SelectControl from "../components/control/SelectControl";
-import BackBtn from "../components/BackBtn";
+import { useNavigate } from 'react-router-dom';
+import api from '../apis/api';
+import { useState } from 'react';
+import FormControl from '../components/control/FormControl';
+import SelectControl from '../components/control/SelectControl';
+import BackBtn from '../components/BackBtn';
 
 const components = {
   DropdownIndicator: null,
 };
 
 const field = [
-  { value: "Work", label: "Work" },
-  { value: "Home", label: "Home" },
-  { value: "Education", label: "Education" },
+  { value: 'Work', label: 'Work' },
+  { value: 'Home', label: 'Home' },
+  { value: 'Education', label: 'Education' },
 ];
 
 // const weekDay = [
@@ -40,23 +40,23 @@ const createOption = (label) => ({
 
 function CreateTask() {
   const [state, setState] = useState({
-    name: "",
+    name: '',
     steps: [],
-    field: "Work",
+    field: 'Work',
     date: format(
       zonedTimeToUtc(
         new Date(),
         Intl.DateTimeFormat().resolvedOptions().timeZone
       ),
-      "yyyy-MM-dd"
+      'yyyy-MM-dd'
     ),
     // weekday: "Mon",
-    starttime: "08:00",
-    endtime: "09:00",
-    comments: "",
+    starttime: '08:00',
+    endtime: '09:00',
+    comments: '',
   });
 
-  const [selectStep, setSelectStep] = useState({ inputValue: "", value: [] });
+  const [selectStep, setSelectStep] = useState({ inputValue: '', value: [] });
 
   const navigate = useNavigate();
 
@@ -70,10 +70,10 @@ function CreateTask() {
     if (!inputValue) return;
     // eslint-disable-next-line default-case
     switch (event.key) {
-      case "Enter":
-      case "Tab":
+      case 'Enter':
+      case 'Tab':
         setSelectStep({
-          inputValue: "",
+          inputValue: '',
           value: [...value, createOption(inputValue)],
         });
         event.preventDefault();
@@ -94,12 +94,12 @@ function CreateTask() {
   async function handleSubmit(event) {
     event.preventDefault();
     try {
-      const response = await api.post("/task", {
+      const response = await api.post('/task', {
         ...state,
         steps: selectStep.value,
       });
       console.log(response.data);
-      navigate("/");
+      navigate('/');
       window.location.reload();
     } catch (err) {
       console.error(err);
@@ -107,30 +107,22 @@ function CreateTask() {
   }
 
   return (
-    <div className="side">
+    <div className='side'>
       <BackBtn />
-      <form className="form-task" onSubmit={handleSubmit}>
+      <form className='form-task' onSubmit={handleSubmit}>
         <FormControl
-          label="Task name"
-          labelclass="label-primary"
-          id="newtaskname"
-          name="name"
+          label='Task name'
+          labelclass='label-primary'
+          id='newtaskname'
+          name='name'
           onChange={handleChange}
           value={state.name}
-          placeholder="Task Name"
-          max="50"
+          placeholder='Task Name'
+          max='50'
         />
 
-        {/* <FormControl
-        label="Step"
-        id="newstepname"
-        name="step"
-        onChange={handleChange}
-        value={state.steps}
-      />
-      <button >+</button> */}
-        <div className="creatable-div">
-          <label htmlFor="selectCreatable" className="">
+        <div className='creatable-div'>
+          <label htmlFor='selectCreatable' className=''>
             Steps
           </label>
           <CreatableSelect
@@ -142,22 +134,22 @@ function CreateTask() {
             onChange={handleChange}
             onInputChange={handleInputChange}
             onKeyDown={handleKeyDown}
-            placeholder="Type your step and press enter..."
+            placeholder='Type your step and press enter...'
             value={selectStep.value}
-            id="selectCreatable"
+            id='selectCreatable'
             // width="20px"
           />
         </div>
 
         <SelectControl
-          label="Field"
-          labelclass="label"
-          id="fieldselect"
-          name="field"
+          label='Field'
+          labelclass='label'
+          id='fieldselect'
+          name='field'
           onChange={handleChange}
           value={state.field}
         >
-          <option disabled value="0">
+          <option disabled value='0'>
             Select
           </option>
           {field.map((currentOptionObj) => (
@@ -167,16 +159,16 @@ function CreateTask() {
           ))}
         </SelectControl>
         <FormControl
-          type="date"
-          label="Date"
-          labelclass="label"
-          id="date"
-          name="date"
+          type='date'
+          label='Date'
+          labelclass='label'
+          id='date'
+          name='date'
           onChange={handleChange}
           value={state.date}
         />
 
-        <p>{format(new Date(state.date), "cccc")}</p>
+        <p>{format(new Date(state.date), 'cccc')}</p>
         {/* <SelectControl
           label="Week Days"
           labelclass="label"
@@ -195,36 +187,36 @@ function CreateTask() {
           ))}
         </SelectControl> */}
 
-        <div className="time-container">
+        <div className='time-container'>
           <FormControl
-            type="time"
-            label="Start Time"
-            labelclass="label"
-            id="starttime"
-            name="starttime"
+            type='time'
+            label='Start Time'
+            labelclass='label'
+            id='starttime'
+            name='starttime'
             onChange={handleChange}
             value={state.starttime}
           />
           <FormControl
-            type="time"
-            label="End Time"
-            labelclass="label"
-            id="endtime"
-            name="endtime"
+            type='time'
+            label='End Time'
+            labelclass='label'
+            id='endtime'
+            name='endtime'
             onChange={handleChange}
             value={state.endtime}
           />
         </div>
 
         <FormControl
-          label="Comments"
-          labelclass="label"
-          id="comments"
-          name="comments"
+          label='Comments'
+          labelclass='label'
+          id='comments'
+          name='comments'
           onChange={handleChange}
           value={state.comments}
         />
-        <button className="btn-lg" type="submit">
+        <button className='btn-lg' type='submit'>
           Create Task
         </button>
       </form>

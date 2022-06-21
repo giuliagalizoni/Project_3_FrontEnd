@@ -14,18 +14,15 @@ import clock from '../assets/img/icons/clock.svg';
 import calendar from '../assets/img/icons/calendar.svg';
 import check from '../assets/img/icons/check.svg';
 import editbutton from '../assets/img/icons/edit.svg';
+import back from '../assets/img/icons/back.svg';
+import backgroundImg from '../assets/img/background-mobile.png';
 
 import { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/authContext';
 import { format } from 'date-fns';
-import { Modal } from 'react-bootstrap';
+import Modal from 'react-modal';
 import api from '../apis/api';
-
-// import "../assets/styles/bootstrap/css/bootstrap-theme.css";
-// import "../assets/styles/bootstrap/css/bootstrap-theme.min.css";
-// import "../assets/styles/bootstrap/css/bootstrap.css";
-// import "../assets/styles/bootstrap/css/bootstrap.min.css";
 
 import './home.css';
 
@@ -39,12 +36,13 @@ function Home() {
   const [showStartTask, setShowStartTask] = useState(false);
   const [showEditTask, setShowEditTask] = useState(false);
   // Modal states
-  const [fullscreen, setFullscreen] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [taskId, setTaskId] = useState('');
   const [currentActiveTask, setcurrentActiveTask] = useState('');
 
   const navigate = useNavigate();
+
+  Modal.setAppElement('#root');
 
   useEffect(() => {
     fetchData();
@@ -102,7 +100,6 @@ function Home() {
 
   function handleShowModal(id) {
     setTaskId(id);
-    setFullscreen(true);
     setShowModal(true);
   }
 
@@ -142,8 +139,13 @@ function Home() {
                 const { _id, name, steps, date, startdate, enddate, done } =
                   task;
                 return (
-                  <div key={_id} className='task-card urgent'>
-                    {/* setar logica pra mudar de urgent pra not-urgent conforme a hora */}
+                  <div
+                    key={_id}
+                    className={`task-card
+                      ${_id === currentActiveTask ? 'urgent' : 'not-urgent'} ${
+                      done ? 'done' : null
+                    }`}
+                  >
                     <div className='task-top'>
                       <h3>{name}</h3>
                       {!done ? (
@@ -167,7 +169,17 @@ function Home() {
                           </button>
                         </>
                       ) : (
-                        <p>DONE!</p>
+                        // <h3 style={{ color: '#76c79e', fontSize: '16px' }}>
+                        //   done
+                        //   {'  '}
+                        <img
+                          style={{
+                            width: '30px',
+                          }}
+                          src={check}
+                          alt='check'
+                        />
+                        // </h3>
                       )}
                     </div>
                     <div className='steps'>
@@ -186,7 +198,7 @@ function Home() {
                       <div className='icon-text-box'>
                         <img src={check} alt='check' />
                         <p className='steps-text'>
-                          Start your task and don't forget to check it!
+                          Start your task and don't forget to checkmark it!
                         </p>
                       </div>
                     </div>
@@ -240,10 +252,25 @@ function Home() {
       </div>
 
       <Modal
-        show={showModal}
-        fullscreen={fullscreen.toString()}
-        onHide={() => setShowModal(false)}
+        isOpen={showModal}
+        style={{
+          content: {
+            width: '100%',
+            height: '100%',
+            padding: '0',
+            position: 'unset',
+            border: 'none',
+            paddingBottom: '10px',
+            backgroundImage: `url(${backgroundImg})`,
+            backgroundRepeat: 'no-repeat',
+            backgroundAttachment: 'fixed',
+            backgroundPosition: 'center',
+          },
+        }}
       >
+        <button className='nav-btns' onClick={() => setShowModal(false)}>
+          <img src={back} />
+        </button>
         <StartTask id={taskId} onEnd={handleEndClick} />
       </Modal>
     </div>
