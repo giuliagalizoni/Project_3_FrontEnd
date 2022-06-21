@@ -1,33 +1,34 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import CreatableSelect from "react-select/creatable";
-import { format } from "date-fns";
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import CreatableSelect from 'react-select/creatable';
+import { format, parseISO } from 'date-fns';
+import { zonedTimeToUtc } from 'date-fns-tz';
 
-import api from "../apis/api";
-import "./taskForms.css";
+import api from '../apis/api';
+import './taskForms.css';
 
-import FormControl from "../components/control/FormControl";
-import SelectControl from "../components/control/SelectControl";
-import BackBtn from "../components/BackBtn";
+import FormControl from '../components/control/FormControl';
+import SelectControl from '../components/control/SelectControl';
+import BackBtn from '../components/BackBtn';
 
 const components = {
   DropdownIndicator: null,
 };
 
 const field = [
-  { value: "Work", label: "Work" },
-  { value: "Home", label: "Home" },
-  { value: "Education", label: "Education" },
+  { value: 'Work', label: 'Work' },
+  { value: 'Home', label: 'Home' },
+  { value: 'Education', label: 'Education' },
 ];
 
 const weekDay = [
-  { value: "Sun", label: "Sun" },
-  { value: "Mon", label: "Mon" },
-  { value: "Tue", label: "Tue" },
-  { value: "Wed", label: "Wed" },
-  { value: "Thu", label: "Thu" },
-  { value: "Fri", label: "Fri" },
-  { value: "Sat", label: "Sat" },
+  { value: 'Sun', label: 'Sun' },
+  { value: 'Mon', label: 'Mon' },
+  { value: 'Tue', label: 'Tue' },
+  { value: 'Wed', label: 'Wed' },
+  { value: 'Thu', label: 'Thu' },
+  { value: 'Fri', label: 'Fri' },
+  { value: 'Sat', label: 'Sat' },
 ];
 
 const createOption = (label) => ({
@@ -37,17 +38,17 @@ const createOption = (label) => ({
 
 function EditTask(props) {
   const [state, setState] = useState({
-    name: "",
+    name: '',
     steps: [],
-    field: "Work",
-    date: format(new Date(), "yyyy-MM-dd"),
-    weekday: "Mon",
-    starttime: "00:00",
-    endtime: "00:00",
-    comments: "",
+    field: 'Work',
+    date: format(new Date(), 'yyyy-MM-dd'),
+    weekday: 'Mon',
+    starttime: '00:00',
+    endtime: '00:00',
+    comments: '',
   });
 
-  const [selectStep, setSelectStep] = useState({ inputValue: "", value: [] });
+  const [selectStep, setSelectStep] = useState({ inputValue: '', value: [] });
 
   const navigate = useNavigate();
   const { id } = useParams();
@@ -86,10 +87,10 @@ function EditTask(props) {
     if (!inputValue) return;
     // eslint-disable-next-line default-case
     switch (event.key) {
-      case "Enter":
-      case "Tab":
+      case 'Enter':
+      case 'Tab':
         setSelectStep({
-          inputValue: "",
+          inputValue: '',
           value: [...value, createOption(inputValue)],
         });
         event.preventDefault();
@@ -120,7 +121,7 @@ function EditTask(props) {
         steps: selectStep.value,
       });
       console.log(response.data);
-      navigate("/");
+      navigate('/');
     } catch (err) {
       console.error(err);
     }
@@ -194,6 +195,7 @@ function EditTask(props) {
           onChange={handleChange}
           value={state.date}
         />
+        {/* <p>{format(new Date(state.date), 'cccc')}</p> */}
         <SelectControl
           label="Week Days"
           labelclass="label"
