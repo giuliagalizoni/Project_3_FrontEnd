@@ -35,6 +35,7 @@ function Home() {
   const [showCreateTask, setShowCreateTask] = useState(false);
   const [showStartTask, setShowStartTask] = useState(false);
   const [showEditTask, setShowEditTask] = useState(false);
+  
   // Modal states
   const [showModal, setShowModal] = useState(false);
   const [taskId, setTaskId] = useState('');
@@ -46,12 +47,14 @@ function Home() {
 
   useEffect(() => {
     fetchData();
+    
   }, [active]);
 
   async function fetchData() {
     try {
       const response = await api.get(`/tasks/${active}`, {});
       setState([...response.data]);
+      
     } catch (err) {
       console.error(err);
     }
@@ -102,6 +105,8 @@ function Home() {
     setTaskId(id);
     setShowModal(true);
   }
+
+  console.log(state)
 
   return (
     // Div web--default criada apenas para organizar o layout responsivo
@@ -248,7 +253,7 @@ function Home() {
         {showCreateTask && <CreateTask />}
         {/* {showCreateTask && <CreateTask />} */}
         {showStartTask && <StartTask id={taskId} onEnd={handleEndClick} />}
-        {showEditTask && <EditTask id={taskId} />}
+        {showEditTask && <EditTask onEdit={setShowEditTask} onDefault={setShowSideDefault} id={taskId} />}
       </div>
 
       <Modal

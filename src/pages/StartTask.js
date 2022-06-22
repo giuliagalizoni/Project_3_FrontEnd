@@ -34,7 +34,8 @@ function StartTask(props) {
 
   const { _id, name, steps, startdate, enddate } = state;
 
-  // console.log(state);
+  console.log(state);
+  console.log(startdate);
 
   return (
     <div className='side'>
@@ -47,13 +48,14 @@ function StartTask(props) {
             <img src={check} alt='Check icon' />
             <h1>Task list</h1>
           </div>
-          {/* <div className='date-box'>
-            <p className=''>{format(new Date(startdate), 'dd/MM/yyyy')},</p>
+          {startdate && enddate && (<div className='date-box'>
+            <p className=''>{format(new Date(startdate), 'cccc')},</p>
             <p className=''>
-              {format(new Date(startdate), 'HH:mm')} -{' '}
+              {format(new Date(startdate), 'HH:mm')} -
               {format(new Date(enddate), 'HH:mm')}
             </p>
-          </div> */}
+          </div>)}
+          
           <p className='steps-text'>Checkmark the steps once you do it.</p>
         </div>
         <div className='steps'>
