@@ -41,10 +41,9 @@ function EditTask(props) {
     name: '',
     steps: [],
     field: 'Work',
-    date: format(new Date(), 'yyyy-MM-dd'),
-    weekday: 'Mon',
-    starttime: '00:00',
-    endtime: '00:00',
+    date: '',
+    starttime: '',
+    endtime: '',
     comments: '',
   });
 
@@ -63,13 +62,14 @@ function EditTask(props) {
           stepsArr.push({ label: step.description, value: step.description })
         );
 
-        console.log(stepsArr);
-        console.log(selectStep.value);
-
         setSelectStep({ ...selectStep, value: [...stepsArr] });
-        console.log(selectStep);
 
-        setState({ ...response.data });
+        setState({
+          ...response.data,
+          date: format(new Date(response.data.startdate), 'yyyy-MM-dd'),
+          starttime: format(new Date(response.data.startdate), 'HH:mm'),
+          endtime: format(new Date(response.data.enddate), 'HH:mm'),
+        });
       } catch (err) {
         console.error(err);
       }
@@ -104,9 +104,8 @@ function EditTask(props) {
       setSelectStep({ ...selectStep, value: [...event] });
       return;
     }
+    console.log(event.target.value);
     setState({ ...state, [event.target.name]: event.target.value });
-
-    console.log(state, selectStep);
   }
 
   async function handleSubmit(event) {
@@ -114,13 +113,14 @@ function EditTask(props) {
 
     try {
       const data = { ...state };
-      delete data._id;
+      // delete data._id;
 
-      const response = await api.patch(`/task/${id}`, {
+      const response = await api.patch(`/task/${props.id ? props.id : id}`, {
         ...data,
         steps: selectStep.value,
       });
-      console.log(response.data);
+      props.onEdit(false)
+      props.onDefault(true)
       navigate('/');
     } catch (err) {
       console.error(err);
@@ -186,54 +186,41 @@ function EditTask(props) {
             </option>
           ))}
         </SelectControl>
-        <FormControl
-          type="date"
-          label="Date"
-          labelclass="label"
-          id="date"
-          name="date"
-          onChange={handleChange}
-          value={state.date}
-        />
+        {state.date && (
+          <FormControl
+            type="date"
+            label="Date"
+            labelclass="label"
+            id="date"
+            name="date"
+            onChange={handleChange}
+            value={state.date}
+          />
+        )}
         {/* <p>{format(new Date(state.date), 'cccc')}</p> */}
-        <SelectControl
-          label="Week Days"
-          labelclass="label"
-          id="weekday"
-          name="weekday"
-          onChange={handleChange}
-          value={state.weekday}
-        >
-          <option disabled value="0">
-            Select
-          </option>
-          {weekDay.map((currentOptionObj) => (
-            <option key={currentOptionObj.value} value={currentOptionObj.value}>
-              {currentOptionObj.label}
-            </option>
-          ))}
-        </SelectControl>
 
-        <div className="time-container">
-          <FormControl
-            type="time"
-            label="Start Time"
-            labelclass="label"
-            id="starttime"
-            name="starttime"
-            onChange={handleChange}
-            value={state.starttime}
-          />
-          <FormControl
-            type="time"
-            label="End Time"
-            labelclass="label"
-            id="endtime"
-            name="endtime"
-            onChange={handleChange}
-            value={state.endtime}
-          />
-        </div>
+        {state.starttime && state.endtime && (
+          <div className="time-container">
+            <FormControl
+              type="time"
+              label="Start Time"
+              labelclass="label"
+              id="starttime"
+              name="starttime"
+              onChange={handleChange}
+              value={state.starttime}
+            />
+            <FormControl
+              type="time"
+              label="End Time"
+              labelclass="label"
+              id="endtime"
+              name="endtime"
+              onChange={handleChange}
+              value={state.endtime}
+            />
+          </div>
+        )}
 
         <FormControl
           label="Comments"
