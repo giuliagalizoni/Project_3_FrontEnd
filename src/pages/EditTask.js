@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import CreatableSelect from 'react-select/creatable';
-import { format, parseISO } from 'date-fns';
-import { zonedTimeToUtc } from 'date-fns-tz';
+import { format } from 'date-fns';
 
 import api from '../apis/api';
 import './taskForms.css';
@@ -19,16 +18,6 @@ const field = [
   { value: 'Work', label: 'Work' },
   { value: 'Home', label: 'Home' },
   { value: 'Education', label: 'Education' },
-];
-
-const weekDay = [
-  { value: 'Sun', label: 'Sun' },
-  { value: 'Mon', label: 'Mon' },
-  { value: 'Tue', label: 'Tue' },
-  { value: 'Wed', label: 'Wed' },
-  { value: 'Thu', label: 'Thu' },
-  { value: 'Fri', label: 'Fri' },
-  { value: 'Sat', label: 'Sat' },
 ];
 
 const createOption = (label) => ({
@@ -75,11 +64,10 @@ function EditTask(props) {
       }
     }
     fetchTask();
-  }, [id]);
+  }, [props.id, id]);
 
   function handleInputChange(inputValue) {
     setSelectStep({ ...selectStep, inputValue });
-    console.log(selectStep);
   }
 
   function handleKeyDown(event) {
@@ -104,7 +92,6 @@ function EditTask(props) {
       setSelectStep({ ...selectStep, value: [...event] });
       return;
     }
-    console.log(event.target.value);
     setState({ ...state, [event.target.name]: event.target.value });
   }
 
@@ -115,12 +102,17 @@ function EditTask(props) {
       const data = { ...state };
       // delete data._id;
 
-      const response = await api.patch(`/task/${props.id ? props.id : id}`, {
+      await api.patch(`/task/${props.id ? props.id : id}`, {
         ...data,
         steps: selectStep.value,
       });
-      props.onEdit(false)
-      props.onDefault(true)
+
+      if (props.id) {
+        props.onEdit(false);
+        props.onDefault(true);
+        window.location.reload();
+        return;
+      }
       navigate('/');
     } catch (err) {
       console.error(err);
@@ -128,18 +120,18 @@ function EditTask(props) {
   }
 
   return (
-    <div className="side">
+    <div className='side'>
       <BackBtn />
-      <form className="form-task" onSubmit={handleSubmit}>
+      <form className='form-task' onSubmit={handleSubmit}>
         <FormControl
-          label="Task name"
-          labelclass="label-primary"
-          id="newtaskname"
-          name="name"
+          label='Task name'
+          labelclass='label-primary'
+          id='newtaskname'
+          name='name'
           onChange={handleChange}
           value={state.name}
-          placeholder="Task Name"
-          max="200"
+          placeholder='Task Name'
+          max='200'
         />
 
         {/* <FormControl
@@ -150,8 +142,8 @@ function EditTask(props) {
         value={state.steps}
       />
       <button >+</button> */}
-        <div className="creatable-div">
-          <label htmlFor="selectCreatable" className="">
+        <div className='creatable-div'>
+          <label htmlFor='selectCreatable' className=''>
             Steps
           </label>
           <CreatableSelect
@@ -163,21 +155,21 @@ function EditTask(props) {
             onChange={handleChange}
             onInputChange={handleInputChange}
             onKeyDown={handleKeyDown}
-            placeholder="Type something and press enter..."
+            placeholder='Type something and press enter...'
             value={selectStep.value}
-            id="selectCreatable"
+            id='selectCreatable'
           />
         </div>
 
         <SelectControl
-          label="Field"
-          labelclass="label"
-          id="fieldselect"
-          name="field"
+          label='Field'
+          labelclass='label'
+          id='fieldselect'
+          name='field'
           onChange={handleChange}
           value={state.field}
         >
-          <option disabled value="0">
+          <option disabled value='0'>
             Select
           </option>
           {field.map((currentOptionObj) => (
@@ -188,11 +180,11 @@ function EditTask(props) {
         </SelectControl>
         {state.date && (
           <FormControl
-            type="date"
-            label="Date"
-            labelclass="label"
-            id="date"
-            name="date"
+            type='date'
+            label='Date'
+            labelclass='label'
+            id='date'
+            name='date'
             onChange={handleChange}
             value={state.date}
           />
@@ -200,22 +192,22 @@ function EditTask(props) {
         {/* <p>{format(new Date(state.date), 'cccc')}</p> */}
 
         {state.starttime && state.endtime && (
-          <div className="time-container">
+          <div className='time-container'>
             <FormControl
-              type="time"
-              label="Start Time"
-              labelclass="label"
-              id="starttime"
-              name="starttime"
+              type='time'
+              label='Start Time'
+              labelclass='label'
+              id='starttime'
+              name='starttime'
               onChange={handleChange}
               value={state.starttime}
             />
             <FormControl
-              type="time"
-              label="End Time"
-              labelclass="label"
-              id="endtime"
-              name="endtime"
+              type='time'
+              label='End Time'
+              labelclass='label'
+              id='endtime'
+              name='endtime'
               onChange={handleChange}
               value={state.endtime}
             />
@@ -223,14 +215,14 @@ function EditTask(props) {
         )}
 
         <FormControl
-          label="Comments"
-          labelclass="label"
-          id="comments"
-          name="comments"
+          label='Comments'
+          labelclass='label'
+          id='comments'
+          name='comments'
           onChange={handleChange}
           value={state.comments}
         />
-        <button className="btn-lg" type="submit">
+        <button className='btn-lg' type='submit'>
           Edit Task
         </button>
       </form>

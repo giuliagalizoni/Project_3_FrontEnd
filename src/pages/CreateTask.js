@@ -1,7 +1,7 @@
 import React from 'react';
 
 import CreatableSelect from 'react-select/creatable';
-import { format, formatRelative } from 'date-fns';
+import { format } from 'date-fns';
 import { zonedTimeToUtc } from 'date-fns-tz';
 
 import './taskForms.css';
@@ -62,7 +62,6 @@ function CreateTask() {
 
   function handleInputChange(inputValue) {
     setSelectStep({ ...selectStep, inputValue });
-    console.log(selectStep);
   }
 
   function handleKeyDown(event) {
@@ -77,7 +76,6 @@ function CreateTask() {
           value: [...value, createOption(inputValue)],
         });
         event.preventDefault();
-        console.log(selectStep);
     }
   }
 

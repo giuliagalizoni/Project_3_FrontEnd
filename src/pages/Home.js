@@ -35,7 +35,7 @@ function Home() {
   const [showCreateTask, setShowCreateTask] = useState(false);
   const [showStartTask, setShowStartTask] = useState(false);
   const [showEditTask, setShowEditTask] = useState(false);
-  
+
   // Modal states
   const [showModal, setShowModal] = useState(false);
   const [taskId, setTaskId] = useState('');
@@ -47,14 +47,12 @@ function Home() {
 
   useEffect(() => {
     fetchData();
-    
   }, [active]);
 
   async function fetchData() {
     try {
       const response = await api.get(`/tasks/${active}`, {});
       setState([...response.data]);
-      
     } catch (err) {
       console.error(err);
     }
@@ -62,7 +60,6 @@ function Home() {
 
   function handleDayClick({ target }) {
     setActive(target.value);
-    console.log(active);
   }
 
   async function handleEndClick() {
@@ -106,8 +103,6 @@ function Home() {
     setShowModal(true);
   }
 
-  console.log(state)
-
   return (
     // Div web--default criada apenas para organizar o layout responsivo
     <div className='web-container'>
@@ -141,8 +136,7 @@ function Home() {
           ) : (
             <div className='taskcards-group'>
               {state.map((task) => {
-                const { _id, name, steps, date, startdate, enddate, done } =
-                  task;
+                const { _id, name, steps, startdate, enddate, done } = task;
                 return (
                   <div
                     key={_id}
@@ -253,7 +247,13 @@ function Home() {
         {showCreateTask && <CreateTask />}
         {/* {showCreateTask && <CreateTask />} */}
         {showStartTask && <StartTask id={taskId} onEnd={handleEndClick} />}
-        {showEditTask && <EditTask onEdit={setShowEditTask} onDefault={setShowSideDefault} id={taskId} />}
+        {showEditTask && (
+          <EditTask
+            onEdit={setShowEditTask}
+            onDefault={setShowSideDefault}
+            id={taskId}
+          />
+        )}
       </div>
 
       <Modal
@@ -274,7 +274,7 @@ function Home() {
         }}
       >
         <button className='nav-btns' onClick={() => setShowModal(false)}>
-          <img src={back} />
+          <img src={back} alt='Back icon' />
         </button>
         <StartTask id={taskId} onEnd={handleEndClick} />
       </Modal>
