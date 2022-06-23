@@ -86,10 +86,13 @@ function Login(props) {
     <div className='web-container'>
       <div className='carousel'>
         <img className='img' src={colaborative} alt='' />
-        <h1>Hey! Do you know that Organize.me is colaborative?</h1>
+        <h1>
+          Create your tasks, organize your deadlines and define your priorities.
+          It's simple!
+        </h1>
         <p>
-          Bring your professional help, a friend or other people to help you,
-          send and invite of your task or share your calendar.{' '}
+          We're more than a notepad. We can help you to organize your tasks in
+          steps and support you on your journey.
         </p>
       </div>
 
