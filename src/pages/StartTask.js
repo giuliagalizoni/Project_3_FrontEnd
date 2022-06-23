@@ -11,9 +11,6 @@ function StartTask(props) {
     name: '',
     steps: [],
     field: '',
-    // date: '',
-    // starttime: '',
-    // endtime: '',
     startdate: '',
     enddate: '',
     comments: '',
@@ -61,12 +58,7 @@ function StartTask(props) {
           <ul className='start-steps-list'>
             {steps.map((step) => (
               <li key={step._id} className='step-checkbox-item'>
-                <input
-                  type='checkbox'
-                  id={step._id}
-                  className='checkbox'
-                  // onClick={() => console.log('clicou', step.description)}
-                />
+                <input type='checkbox' id={step._id} className='checkbox' />
                 <label className='step-label' htmlFor={step._id}>
                   {step.description}
                 </label>

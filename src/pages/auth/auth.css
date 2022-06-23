@@ -101,6 +101,8 @@ input:valid + .auth-label {
   font-weight: 800;
   font-size: 20px;
   line-height: 108.1%;
+
+  cursor: pointer;
 }
 
 .spam {

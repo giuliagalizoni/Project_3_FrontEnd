@@ -75,7 +75,7 @@
   line-height: 20px;
 
   letter-spacing: 0.01em;
-  font-feature-settings: "pnum" on, "lnum" on;
+  font-feature-settings: 'pnum' on, 'lnum' on;
 
   color: #2b69f5;
 }
@@ -117,29 +117,9 @@
   border: 1px solid #2b69f5;
 }
 
-/* .checkbox::before {
-  content: "";
-  width: 1em;
-  height: 1em;
-  transform: scale(0);
-  transition: 100ms transform ease-in-out;
-  box-shadow: inset 1em 1em var(--form-control-color);
-
-  background-color: #2b69f5;
-  background-image: url("../assets/img/icons/check.svg");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-}
-
-.checkbox:checked::before {
-  transform: scale(2.5);
-  border-radius: 50%;
-} */
-
 .checkbox:checked {
   background-color: #2b69f5;
-  background-image: url("../assets/img/icons/Vectorwhite-check.svg");
+  background-image: url('../assets/img/icons/Vectorwhite-check.svg');
   background-image: -webkit-image-set();
   background-repeat: no-repeat;
   background-position: center;
@@ -151,7 +131,7 @@
   font-size: 16px;
   line-height: 20px;
   letter-spacing: 0.01em;
-  font-feature-settings: "pnum" on, "lnum" on;
+  font-feature-settings: 'pnum' on, 'lnum' on;
 
   color: #828282;
 }
