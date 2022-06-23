@@ -1,6 +1,5 @@
 import api from '../apis/api';
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
 import { format } from 'date-fns';
 
 import './startTask.css';
@@ -32,10 +31,7 @@ function StartTask(props) {
     fetchData();
   }, [props.id]);
 
-  const { _id, name, steps, startdate, enddate } = state;
-
-  console.log(state);
-  console.log(startdate);
+  const { name, steps, startdate, enddate } = state;
 
   return (
     <div className='side'>
@@ -48,14 +44,16 @@ function StartTask(props) {
             <img src={check} alt='Check icon' />
             <h1>Task list</h1>
           </div>
-          {startdate && enddate && (<div className='date-box'>
-            <p className=''>{format(new Date(startdate), 'cccc')},</p>
-            <p className=''>
-              {format(new Date(startdate), 'HH:mm')} -
-              {format(new Date(enddate), 'HH:mm')}
-            </p>
-          </div>)}
-          
+          {startdate && enddate && (
+            <div className='date-box'>
+              <p className=''>{format(new Date(startdate), 'cccc')},</p>
+              <p className=''>
+                {format(new Date(startdate), 'HH:mm')} -
+                {format(new Date(enddate), 'HH:mm')}
+              </p>
+            </div>
+          )}
+
           <p className='steps-text'>Checkmark the steps once you do it.</p>
         </div>
         <div className='steps'>
@@ -67,7 +65,7 @@ function StartTask(props) {
                   type='checkbox'
                   id={step._id}
                   className='checkbox'
-                  onClick={() => console.log('clicou', step.description)}
+                  // onClick={() => console.log('clicou', step.description)}
                 />
                 <label className='step-label' htmlFor={step._id}>
                   {step.description}
