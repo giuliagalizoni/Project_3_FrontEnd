@@ -84,6 +84,9 @@
   list-style: none;
   margin: 0;
   padding: 0;
+
+  overflow-y: auto;
+  max-height: 40vh;
 }
 
 .step-checkbox-item {
@@ -92,7 +95,7 @@
   align-items: center;
 
   margin: 10px 0;
-  width: 380px;
+  /* width: 380px; */
   height: 56px;
 
   background: #dbecfb;
