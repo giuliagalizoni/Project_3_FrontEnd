@@ -65,7 +65,7 @@ function Login(props) {
       setErrors({
         ...errors,
         password:
-          'Your password must have at least 8 characters including one number and one special character',
+          'Your password must have at least 8 characters including one upper case letter, one number and one special character',
       });
     } else {
       setErrors({ ...errors, password: null });
@@ -129,6 +129,7 @@ function Login(props) {
               id='signupFormPassword'
               value={state.password}
               error={errors.password}
+              maxLength='25'
               onChange={handleChange}
               onBlur={handleBlur}
               required

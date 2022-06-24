@@ -115,9 +115,9 @@ function Home() {
           <h1> Welcome, {loggedInUser.user.name}!</h1>
         </div>
 
-        <div>
-          <Calendar onClick={handleDayClick} active={active} />
-        </div>
+        {/* <div> */}
+        <Calendar onClick={handleDayClick} active={active} />
+        {/* </div> */}
 
         <div className='tasks-container'>
           <h2>Tasks</h2>

@@ -105,7 +105,7 @@ function CreateTask() {
   }
 
   return (
-    <div className='side'>
+    <div className='form-side side'>
       <BackBtn />
       <form className='form-task' onSubmit={handleSubmit}>
         <FormControl
@@ -116,7 +116,7 @@ function CreateTask() {
           onChange={handleChange}
           value={state.name}
           placeholder='Task Name'
-          max='50'
+          max='35'
         />
 
         <div className='creatable-div'>
