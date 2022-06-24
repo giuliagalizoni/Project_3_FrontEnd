@@ -86,7 +86,8 @@
   padding: 0;
 
   overflow-y: auto;
-  max-height: 40vh;
+  max-height: 58vh;
+  min-width: 300px;
 }
 
 .step-checkbox-item {
