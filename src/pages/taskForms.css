@@ -31,7 +31,7 @@
 .creatable-div {
   overflow-y: auto;
   max-width: 360px;
-  min-width: 300px;
+  min-width: 360px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -44,7 +44,7 @@
 
 @media only screen and (min-width: 568px) {
   .creatable-div {
-    min-width: 400px;
+    min-width: 460px;
     max-width: 460px;
   }
 }
@@ -52,14 +52,14 @@
 @media only screen and (min-width: 768px) {
   .creatable-div {
     min-width: 600px;
-    max-width: 660px;
+    max-width: 600px;
   }
 }
 
 @media only screen and (min-width: 992px) {
   .creatable-div {
     min-width: 300px;
-    max-width: 360px;
+    max-width: 300px;
   }
 
   .form-task {

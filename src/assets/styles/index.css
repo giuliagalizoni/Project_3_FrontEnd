@@ -137,7 +137,6 @@ button:disabled {
   }
 
   .container-default {
-    /* width: 548px; */
     padding-left: 80px;
     padding-top: 25px;
   }
@@ -175,21 +174,20 @@ button:disabled {
     padding: 10px 20px;
   }
 }
-/* 
+
 @media only screen and (min-width: 1200px) {
   .container-default {
-    width: 768px;
-    padding-left: 80px;
+    min-width: 668px;
   }
 
-  .side {
+  /* .side {
     width: 400px;
-  }
-} */
+  } */
+}
 
 @media only screen and (min-width: 1400px) {
   .container-default {
-    /* width: 868px; */
+    min-width: 868px;
     /* padding-left: 80px; */
     height: 100vh;
   }
