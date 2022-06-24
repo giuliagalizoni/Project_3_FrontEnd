@@ -120,7 +120,7 @@ function EditTask(props) {
   }
 
   return (
-    <div className='side'>
+    <div className='form-side side'>
       <BackBtn />
       <form className='form-task' onSubmit={handleSubmit}>
         <FormControl

@@ -8,7 +8,7 @@
   display: none;
 }
 
-h1 {
+.login-side h1 {
   font-weight: 700;
   font-size: 28px;
   line-height: 135%;
@@ -89,7 +89,7 @@ input:valid + .auth-label {
 }
 
 .btn-lg {
-  width: 371px;
+  width: 100%;
   height: 63px;
 
   background: #3397f1;
@@ -101,6 +101,8 @@ input:valid + .auth-label {
   font-weight: 800;
   font-size: 20px;
   line-height: 108.1%;
+
+  cursor: pointer;
 }
 
 .spam {

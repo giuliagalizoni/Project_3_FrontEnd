@@ -104,7 +104,6 @@ function Home() {
   }
 
   return (
-    // Div web--default criada apenas para organizar o layout responsivo
     <div className='web-container'>
       <div className='container-default'>
         <Navbar
@@ -116,9 +115,9 @@ function Home() {
           <h1> Welcome, {loggedInUser.user.name}!</h1>
         </div>
 
-        <div>
-          <Calendar onClick={handleDayClick} active={active} />
-        </div>
+        {/* <div> */}
+        <Calendar onClick={handleDayClick} active={active} />
+        {/* </div> */}
 
         <div className='tasks-container'>
           <h2>Tasks</h2>
@@ -168,9 +167,6 @@ function Home() {
                           </button>
                         </>
                       ) : (
-                        // <h3 style={{ color: '#76c79e', fontSize: '16px' }}>
-                        //   done
-                        //   {'  '}
                         <img
                           style={{
                             width: '30px',
@@ -201,7 +197,7 @@ function Home() {
                         </p>
                       </div>
                     </div>
-                    {/* <div>Progress:</div> */}
+
                     <div className='task-bottom'>
                       <div className='icon-text-box'>
                         <img src={clock} alt='Clock icon' />
@@ -214,7 +210,7 @@ function Home() {
                           {format(new Date(startdate), 'dd/MM/yyyy')}
                         </p>
                       </div>
-                      {/* trocar por icons */}
+
                       <div className='icon-btns'>
                         <button
                           className='icon-btn hide-web'
